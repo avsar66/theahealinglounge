@@ -26,10 +26,10 @@
  .hero{ position:relative; min-height:96vh; display:flex; align-items:flex-end; overflow:hidden; }
  .hero .bg{ position:absolute; inset:0; }
  .hero .bg img{ width:100%; height:100%; object-fit:cover; }
- .hero .bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,15,8.42) 0%, rgba(24,15,8.12) 32%, rgba(24,15,8.55) 78%, rgba(24,15,8.82) 100%); }
+ .hero .bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,15,8,.42) 0%, rgba(24,15,8,.12) 32%, rgba(24,15,8,.55) 78%, rgba(24,15,8,.82) 100%); }
  .hero .inner{ position:relative; z-index:2; color:var(--cream); padding-bottom:clamp(56px,8vw,104px); padding-top:140px; max-width:880px; }
  .hero .display{ color:var(--cream); margin:18px 0 22px; }
- .hero p{ color:rgba(243,236,222.9); max-width:54ch; font-size:clamp(17px,1.4vw,20px); }
+ .hero p{ color:rgba(243,236,222,.9); max-width:54ch; font-size:clamp(17px,1.4vw,20px); }
  .hero .cta-row{ display:flex; gap:16px; flex-wrap:wrap; margin-top:34px; }
  .scroll-cue{ position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:2; color:var(--cream); opacity:.6; font-size:11px; letter-spacing:.3em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; }
  .scroll-cue .line{ width:1px; height:42px; background:linear-gradient(var(--cream), transparent); animation:cue 2.4s var(--ease) infinite; }
@@ -49,18 +49,18 @@
 
  /* rood licht band */
  .rood-band{ position:relative; overflow:hidden; }
- .rood-band .glow{ position:absolute; right:-10%; top:-30%; width:60%; height:160%; background:radial-gradient(circle, rgba(176,84,63.5), transparent 62%); filter:blur(20px); }
+ .rood-band .glow{ position:absolute; right:-10%; top:-30%; width:60%; height:160%; background:radial-gradient(circle, rgba(176,84,63,.5), transparent 62%); filter:blur(20px); }
  .rood-band .inner{ position:relative; display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center; }
- .rood-band .badge{ display:inline-flex; align-items:center; gap:10px; background:rgba(176,84,63.16); border:1px solid rgba(201,116,94.5); color:var(--rood-soft); padding:8px 16px; border-radius:var(--r-pill); font-size:12.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+ .rood-band .badge{ display:inline-flex; align-items:center; gap:10px; background:rgba(176,84,63,.16); border:1px solid rgba(201,116,94,.5); color:var(--rood-soft); padding:8px 16px; border-radius:var(--r-pill); font-size:12.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
 
  /* philosophy / shader */
  .ritueel{ position:relative; min-height:78vh; display:grid; place-items:center; overflow:hidden; background:var(--espresso-900); }
  .ritueel canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
- .ritueel::after{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(24,15,8.1), rgba(24,15,8.66) 80%); pointer-events:none; }
+ .ritueel::after{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(24,15,8,.1), rgba(24,15,8,.66) 80%); pointer-events:none; }
  .ritueel .inner{ position:relative; z-index:2; text-align:center; max-width:720px; padding:60px 24px; pointer-events:none; }
  .ritueel .quote{ font-family:var(--serif); font-size:clamp(30px,4.4vw,58px); line-height:1.16; color:var(--gold-soft); font-weight:500; }
- .ritueel .sub{ color:rgba(232,211,164.75); margin-top:24px; font-size:15px; letter-spacing:.06em; }
- .ritueel .hint{ position:absolute; bottom:22px; left:50%; transform:translateX(-50%); z-index:3; color:rgba(232,211,164.5); font-size:11px; letter-spacing:.24em; text-transform:uppercase; }
+ .ritueel .sub{ color:rgba(232,211,164,.75); margin-top:24px; font-size:15px; letter-spacing:.06em; }
+ .ritueel .hint{ position:absolute; bottom:22px; left:50%; transform:translateX(-50%); z-index:3; color:rgba(232,211,164,.5); font-size:11px; letter-spacing:.24em; text-transform:uppercase; }
 
  /* pillars */
  .pillars{ grid-template-columns:repeat(3,1fr); gap:clamp(28px,4vw,64px); }
@@ -80,8 +80,8 @@
  .cta-band .display{ color:var(--cream); }
 
  /* quiz invitation band */
- .quiz-invite{ position:relative; overflow:hidden; border-radius:var(--r-xl); padding:clamp(40px,6vw,76px) clamp(26px,5vw,60px); text-align:center; background:linear-gradient(140deg, var(--linen) 0%, var(--linen-deep) 100%); border:1px solid rgba(188,129,58.28); box-shadow:var(--shadow-md); }
- .quiz-invite .qi-glow{ position:absolute; right:-8%; top:-40%; width:48%; height:170%; background:radial-gradient(circle, rgba(188,129,58.30), transparent 64%); filter:blur(16px); pointer-events:none; }
+ .quiz-invite{ position:relative; overflow:hidden; border-radius:var(--r-xl); padding:clamp(40px,6vw,76px) clamp(26px,5vw,60px); text-align:center; background:linear-gradient(140deg, var(--linen) 0%, var(--linen-deep) 100%); border:1px solid rgba(188,129,58,.28); box-shadow:var(--shadow-md); }
+ .quiz-invite .qi-glow{ position:absolute; right:-8%; top:-40%; width:48%; height:170%; background:radial-gradient(circle, rgba(188,129,58,.30), transparent 64%); filter:blur(16px); pointer-events:none; }
  .quiz-invite .qi-inner{ position:relative; z-index:2; max-width:640px; margin-inline:auto; }
  .quiz-invite h2{ margin:14px 0 16px; }
  .quiz-invite p{ color:var(--ink-soft); font-size:clamp(16px,1.4vw,18px); margin:0 auto; max-width:48ch; }
@@ -101,7 +101,7 @@
  }
  @media (max-width:560px){
  .feat-grid{ grid-template-columns:1fr; }
- .hero{ min-height:90vh; }
+ .hero{ min-height:90vh; } .scroll-cue{ display:none; }
  }
 </style>
 </head>
@@ -228,7 +228,7 @@
  </div>
  <div class="photo" style="border-radius:var(--r-lg);aspect-ratio:4/3.4;min-height:240px">
  <img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/08/Untitled-3.jpg" alt="Rode Licht Ruimte" onerror="this.classList.add('img-failed')">
- <div class="scrim" style="background:linear-gradient(180deg,transparent,rgba(176,84,63.35))"></div>
+ <div class="scrim" style="background:linear-gradient(180deg,transparent,rgba(176,84,63,.35))"></div>
  </div>
  </div>
  </section>

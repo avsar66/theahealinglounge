@@ -100,7 +100,7 @@
  <div class="container">
  <div class="foot-grid">
  <div class="foot-brand">
- <img src="${(window.HL_LOGOS&&window.HL_LOGOS.logoLight)||'assets/brand/logo-light.png'}" alt="The Healing Lounge" style="height:54px;width:auto;max-width:80%;object-fit:contain;margin-bottom:16px">
+ <img src="${(window.HL_LOGOS&&window.HL_LOGOS.logo)||'assets/brand/logo.png'}" alt="The Healing Lounge" style="height:54px;width:auto;max-width:80%;object-fit:contain;margin-bottom:16px">
  <p style="max-width:30ch" data-nl="Een luxe zonnestudio en wellnesssalon in Leusden, rust voor lichaam en geest, met boeddhistische zachtheid." data-en="A luxury tanning studio and wellness salon in Leusden, rest for body and mind, with Buddhist softness.">Een luxe zonnestudio en wellnesssalon in Leusden, rust voor lichaam en geest, met boeddhistische zachtheid.</p>
  </div>
  <div>

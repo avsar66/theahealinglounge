@@ -15,8 +15,8 @@
 <style>
  .page-hero{ background:var(--espresso); color:var(--cream); padding:160px 0 70px; position:relative; overflow:hidden; }
  .page-hero .display{ color:var(--cream); margin:16px 0 18px; font-size:clamp(40px,5.5vw,72px); }
- .page-hero p{ color:rgba(243,236,222.82); max-width:54ch; }
- .page-hero .glow{ position:absolute; right:-6%; top:-50%; width:46%; height:180%; background:radial-gradient(circle, rgba(188,129,58.3), transparent 62%); filter:blur(10px); }
+ .page-hero p{ color:rgba(243,236,222,.82); max-width:54ch; }
+ .page-hero .glow{ position:absolute; right:-6%; top:-50%; width:46%; height:180%; background:radial-gradient(circle, rgba(188,129,58,.3), transparent 62%); filter:blur(10px); }
 
  .contact-grid{ display:grid; grid-template-columns:1fr 1.1fr; gap:clamp(36px,5vw,72px); align-items:start; }
  .info-block{ display:flex; flex-direction:column; gap:30px; }
@@ -33,6 +33,22 @@
  .map{ margin-top:60px; aspect-ratio:21/7; border-radius:var(--r-lg); min-height:240px; }
  .map .pin{ font-family:var(--serif); font-size:20px; color:var(--ink); display:flex; flex-direction:column; gap:6px; align-items:center; text-align:center; }
 
+ .map-wrap{ position:relative; margin-top:60px; border-radius:var(--r-lg); overflow:hidden; min-height:300px; box-shadow:var(--shadow-sm); }
+ .map-embed{ width:100%; height:380px; border:0; display:block; }
+ .map-cta{ position:absolute; left:16px; bottom:16px; display:inline-flex; align-items:center; gap:9px; background:var(--espresso); color:var(--cream); border:0; border-radius:var(--r-pill); padding:13px 22px; font-weight:600; font-size:14.5px; cursor:pointer; box-shadow:var(--shadow-md); }
+ .map-cta .ic{ color:var(--gold); font-size:17px; }
+ .map-cta:hover{ background:var(--cocoa); }
+ .nav-sheet{ position:fixed; inset:0; z-index:120; background:rgba(24,15,8,.5); display:flex; align-items:flex-end; justify-content:center; }
+ .nav-card{ background:var(--paper); width:100%; max-width:440px; border-radius:var(--r-lg) var(--r-lg) 0 0; padding:24px; box-shadow:var(--shadow-lg); animation:navup .3s var(--ease); }
+ @keyframes navup{ from{ transform:translateY(30px); opacity:0; } to{ transform:none; opacity:1; } }
+ .nav-head{ display:flex; align-items:center; justify-content:space-between; }
+ .nav-head b{ font-family:var(--serif); font-size:20px; }
+ .nav-close{ background:none; border:0; font-size:26px; color:var(--ink-soft); cursor:pointer; line-height:1; }
+ .nav-addr{ font-size:13.5px; color:var(--ink-soft); margin:2px 0 16px; }
+ .nav-opt{ display:flex; align-items:center; gap:12px; padding:15px 16px; border:1px solid var(--linen-deep); border-radius:var(--r-md); font-weight:600; font-size:15.5px; color:var(--ink); margin-bottom:10px; }
+ .nav-opt:hover{ border-color:var(--honey); background:var(--linen); }
+ .nav-opt .d{ width:11px; height:11px; border-radius:50%; flex:none; }
+ @media (min-width:600px){ .nav-sheet{ align-items:center; } .nav-card{ border-radius:var(--r-lg); } }
  @media (max-width:900px){ .contact-grid{ grid-template-columns:1fr; } .form-row{ grid-template-columns:1fr; } }
 </style>
 </head>
@@ -55,7 +71,7 @@
  <div class="info-item">
  <div class="k" data-nl="Adres" data-en="Address">Adres</div>
  <div class="v">De Brouwerij 4<br>3831 ND Leusden</div>
- <a class="more-link" style="font-weight:600;font-size:14px;color:var(--ink);border-bottom:1px solid var(--honey);padding-bottom:3px;display:inline-block;margin-top:12px" href="https://maps.google.com/?q=De+Brouwerij+4+Leusden" target="_blank" rel="noopener" data-nl="Routebeschrijving →" data-en="Get directions →">Routebeschrijving →</a>
+ <button class="nav-trigger" type="button" style="font-weight:600;font-size:14px;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--honey);padding:0 0 3px;display:inline-block;margin-top:12px;cursor:pointer" data-nl="Routebeschrijving →" data-en="Get directions →">Routebeschrijving →</button>
  </div>
  <div class="info-item">
  <div class="k" data-nl="Telefoon" data-en="Phone">Telefoon</div>
@@ -68,9 +84,9 @@
  <div class="info-item">
  <div class="k" data-nl="Openingstijden" data-en="Opening hours">Openingstijden</div>
  <div style="margin-top:6px">
- <div class="hours-row"><span data-nl="Maandag" data-en="Monday">Maandag</span><span>12:00, 20:30</span></div>
- <div class="hours-row"><span data-nl="Dinsdag t/m vrijdag" data-en="Tuesday, Friday">Dinsdag t/m vrijdag</span><span>10:00, 20:30</span></div>
- <div class="hours-row"><span data-nl="Zaterdag" data-en="Saturday">Zaterdag</span><span>10:00, 15:30</span></div>
+ <div class="hours-row"><span data-nl="Maandag" data-en="Monday">Maandag</span><span>12:00–20:30</span></div>
+ <div class="hours-row"><span data-nl="Dinsdag t/m vrijdag" data-en="Tuesday–Friday">Dinsdag t/m vrijdag</span><span>10:00–20:30</span></div>
+ <div class="hours-row"><span data-nl="Zaterdag" data-en="Saturday">Zaterdag</span><span>10:00–15:30</span></div>
  <div class="hours-row"><span data-nl="Zondag" data-en="Sunday">Zondag</span><span data-nl="Gesloten" data-en="Closed">Gesloten</span></div>
  </div>
  </div>
@@ -95,12 +111,29 @@
  </div>
 
  <div class="container">
- <div class="map" style="background:repeating-linear-gradient(135deg,rgba(120,90,55.10) 0 14px,rgba(120,90,55.04) 14px 28px),linear-gradient(160deg,var(--linen-deep),var(--linen));display:flex;align-items:center;justify-content:center">
- <div class="pin"><span style="font-size:30px;color:var(--honey)">⌖</span><span>De Brouwerij 4 · Leusden</span><span style="font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)" data-nl="interactieve kaart in build" data-en="interactive map in build">interactieve kaart in build</span></div>
+ <div class="map-wrap"><iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="The Healing Lounge op de kaart" src="https://www.google.com/maps?q=De%20Brouwerij%204%2C%203831%20ND%20Leusden&output=embed"></iframe><button class="map-cta nav-trigger" type="button"><span class="ic">⌖</span><span data-nl="Navigeer hierheen" data-en="Navigate here">Navigeer hierheen</span></button>
+ 
  </div>
  </div>
  </section>
 
+ <div class="nav-sheet" id="nav-sheet" hidden>
+ <div class="nav-card">
+ <div class="nav-head"><b data-nl="Navigeren naar…" data-en="Navigate to…">Navigeren naar…</b><button class="nav-close" type="button" aria-label="Sluiten">×</button></div>
+ <div class="nav-addr">De Brouwerij 4 · 3831 ND Leusden</div>
+ <a class="nav-opt" href="https://www.google.com/maps/dir/?api=1&destination=De%20Brouwerij%204%2C%203831%20ND%20Leusden" target="_blank" rel="noopener"><span class="d" style="background:#4285F4"></span>Google Maps</a>
+ <a class="nav-opt" href="https://maps.apple.com/?daddr=De%20Brouwerij%204%2C%203831%20ND%20Leusden" target="_blank" rel="noopener"><span class="d" style="background:#7d7d7d"></span>Apple Maps</a>
+ <a class="nav-opt" href="https://waze.com/ul?q=De%20Brouwerij%204%2C%203831%20ND%20Leusden&navigate=yes" target="_blank" rel="noopener"><span class="d" style="background:#33ccff"></span>Waze</a>
+ <a class="nav-opt" href="geo:0,0?q=De%20Brouwerij%204%2C%203831%20ND%20Leusden"><span class="d" style="background:var(--honey)"></span><span data-nl="Standaard kaart-app" data-en="Default maps app">Standaard kaart-app</span></a>
+ </div>
+ </div>
+ <script>
+ (function(){ var s=document.getElementById('nav-sheet'); function op(){s.hidden=false;} function cl(){s.hidden=true;}
+ document.querySelectorAll('.nav-trigger').forEach(function(b){b.addEventListener('click',op);});
+ s.addEventListener('click',function(e){ if(e.target===s||e.target.classList.contains('nav-close')) cl(); });
+ s.querySelectorAll('.nav-opt').forEach(function(a){ a.addEventListener('click',function(){ setTimeout(cl,200); }); });
+ })();
+ </script>
  <footer data-site-footer></footer>
 
  <script src="wallpapers.js"></script>

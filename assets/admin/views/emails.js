@@ -53,14 +53,14 @@
     const mail=window.h('<div></div>'); prev.appendChild(mail);
 
     function draw(){
-      const A2=window.HLA; const br=(window.admBranding?window.admBranding(A2):(A2.get().settings.branding||{logoLight:'assets/brand/logo-light.png',emailLogoWidth:200}));
+      const A2=window.HLA; const br=(window.admBranding?window.admBranding(A2):(A2.get().settings.branding||{logo:'assets/brand/logo.png',emailLogoWidth:200}));
       const subj=prevLang==='nl'?ed.querySelector('#t-snl').value:ed.querySelector('#t-sen').value;
       const bdy=prevLang==='nl'?ed.querySelector('#t-bnl').value:ed.querySelector('#t-ben').value;
       const btn=prevLang==='nl'?t.btnNl:t.btnEn;
       const w=prevDevice==='mobile'?340:'100%';
       mail.innerHTML='';
       mail.appendChild(window.h(`<div style="margin:0 auto;width:${prevDevice==='mobile'?w+'px':'100%'};max-width:100%;border:1px solid var(--adm-line);border-radius:12px;overflow:hidden;background:#fff">
-        <div style="background:var(--espresso);padding:22px;text-align:center"><img src="${esc(br.logoLight)}" style="width:${br.emailLogoWidth||200}px;max-width:70%;object-fit:contain"></div>
+        <div style="background:var(--espresso);padding:22px;text-align:center"><img src="${esc(br.logo||br.logoLight)}" style="width:${br.emailLogoWidth||200}px;max-width:70%;object-fit:contain"></div>
         <div style="padding:24px"><div class="faint" style="font-size:12px;margin-bottom:10px">Onderwerp: ${esc(fill(subj))}</div>
         <div style="white-space:pre-wrap;font-size:14px;line-height:1.6;color:var(--ink)">${esc(fill(bdy))}</div>
         ${btn?`<div style="margin-top:18px"><span style="display:inline-block;background:var(--honey);color:#fff;padding:11px 22px;border-radius:999px;font-weight:600;font-size:13px">${esc(fill(btn))}</span></div>`:''}
