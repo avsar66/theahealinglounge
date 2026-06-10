@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>The Healing Lounge · Shader Wallpapers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --espresso:#241910; --linen:#F2EBDB; --honey:#D18C3D; --gold:#EBC985;
+ --glass:rgba(36,25,16,0.42);
+ }
+ *{ box-sizing:border-box; margin:0; padding:0; }
+ html,body{ height:100%; }
+ body{
+ background:var(--espresso); color:var(--linen);
+ font-family:'Jost',sans-serif; overflow:hidden;
+ -webkit-font-smoothing:antialiased; cursor:none;
+ }
+ #gl{ position:fixed; inset:0; width:100%; height:100%; display:block; }
+
+ /* soft cursor glow */
+ #cursor{
+ position:fixed; top:0; left:0; width:26px; height:26px; border-radius:50%;
+ pointer-events:none; z-index:40; transform:translate(-50%,-50%);
+ border:1px solid rgba(235,201,133,0.55);
+ box-shadow:0 0 18px 4px rgba(235,201,133,0.20), inset 0 0 10px rgba(235,201,133,0.18);
+ transition:width .25s ease, height .25s ease, opacity .4s ease;
+ mix-blend-mode:screen; opacity:0;
+ }
+ #cursor.tap{ width:46px; height:46px; }
+
+ /* top label */
+ .meta{
+ position:fixed; top:38px; left:44px; z-index:30; pointer-events:none;
+ text-shadow:0 2px 24px rgba(0,0,0,0.45);
+ }
+ .meta .kicker{
+ font-size:11px; letter-spacing:0.42em; text-transform:uppercase;
+ color:rgba(242,235,219,0.62); font-weight:400; margin-bottom:10px;
+ }
+ .meta .title{
+ font-family:'Cormorant Garamond',serif; font-weight:500;
+ font-size:clamp(34px,5vw,58px); line-height:1.0; letter-spacing:0.005em;
+ transition:opacity .5s ease, transform .5s ease;
+ }
+ .meta .en{
+ font-style:italic; font-family:'Cormorant Garamond',serif;
+ color:var(--gold); font-size:clamp(15px,1.6vw,19px); margin-top:6px;
+ transition:opacity .5s ease;
+ }
+ .swap{ opacity:0; transform:translateY(8px); }
+
+ /* hint */
+ .hint{
+ position:fixed; top:42px; right:46px; z-index:30; text-align:right;
+ font-size:11.5px; letter-spacing:0.16em; color:rgba(242,235,219,0.5);
+ line-height:2.0; pointer-events:none; text-transform:uppercase; white-space:nowrap;
+ }
+ .hint b{ color:var(--gold); font-weight:500; }
+
+ /* dock */
+ .dock{
+ position:fixed; left:50%; bottom:34px; transform:translateX(-50%);
+ z-index:30; display:flex; gap:14px; align-items:flex-end;
+ padding:14px 18px; border-radius:22px;
+ background:var(--glass); backdrop-filter:blur(18px) saturate(1.1);
+ -webkit-backdrop-filter:blur(18px) saturate(1.1);
+ border:1px solid rgba(242,235,219,0.12);
+ box-shadow:0 18px 50px rgba(0,0,0,0.45);
+ }
+ .chip{
+ position:relative; display:flex; flex-direction:column; align-items:center;
+ gap:9px; cursor:pointer; padding:2px 4px 0; border:0; background:none;
+ color:inherit; font-family:inherit;
+ }
+ .chip .sw{
+ width:54px; height:34px; border-radius:9px;
+ border:1px solid rgba(242,235,219,0.18);
+ box-shadow:inset 0 0 0 1px rgba(0,0,0,0.15), 0 4px 12px rgba(0,0,0,0.3);
+ transition:transform .35s cubic-bezier(.2.7.2,1), box-shadow .35s ease, border-color .35s ease;
+ filter:saturate(0.92) brightness(0.92);
+ }
+ .chip .lbl{
+ font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+ color:rgba(242,235,219,0.5); transition:color .3s ease; white-space:nowrap;
+ }
+ .chip:hover .sw{ transform:translateY(-4px); filter:saturate(1) brightness(1.02); }
+ .chip:hover .lbl{ color:rgba(242,235,219,0.85); }
+ .chip.active .sw{
+ transform:translateY(-7px);
+ border-color:var(--gold);
+ box-shadow:0 0 0 1px rgba(235,201,133,0.5), 0 8px 22px rgba(0,0,0,0.4), 0 0 22px rgba(235,201,133,0.25);
+ filter:saturate(1.05) brightness(1.05);
+ }
+ .chip.active .lbl{ color:var(--gold); }
+
+ @media (max-width:680px){
+ .meta{ top:26px; left:24px; } .hint{ display:none; }
+ .dock{ gap:8px; padding:11px 12px; bottom:22px; border-radius:18px; }
+ .chip .sw{ width:42px; height:28px; }
+ .chip .lbl{ display:none; }
+ }
+</style>
+</head>
+<body>
+ <canvas id="gl"></canvas>
+ <div id="cursor"></div>
+
+ <div class="meta">
+ <div class="kicker">The Healing Lounge</div>
+ <div class="title" id="title">Honingstroom</div>
+ <div class="en" id="en">Honey Flow</div>
+ </div>
+
+ <div class="hint">
+ <div>Beweeg de muis &nbsp;·&nbsp; <b>volg het licht</b></div>
+ <div>Klik &nbsp;·&nbsp; <b>laat rimpels vallen</b></div>
+ <div>Toetsen <b>1–5</b> &nbsp;·&nbsp; wissel sfeer</div>
+ </div>
+
+ <nav class="dock" id="dock"></nav>
+
+ <script src="wallpapers.js"></script>
+ <script>
+ (function(){
+ const canvas = document.getElementById('gl');
+ const gl = canvas.getContext('webgl', { antialias:true, premultipliedAlpha:false, preserveDrawingBuffer:true });
+ if(!gl){ document.body.innerHTML='<p style="padding:40px;font-family:serif">WebGL niet beschikbaar in deze browser.</p>'; return; }
+
+ const WP = window.HL_WALLPAPERS, PRELUDE = window.HL_PRELUDE;
+ const VERT = 'attribute vec2 a_pos; void main(){ gl_Position=vec4(a_pos,0.0,1.0); }';
+ const MAXCLICKS = 10;
+
+ function compile(type, src){
+ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s);
+ if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+ return s;
+ }
+ function makeProgram(frag){
+ const p = gl.createProgram();
+ gl.attachShader(p, compile(gl.VERTEX_SHADER, VERT));
+ gl.attachShader(p, compile(gl.FRAGMENT_SHADER, PRELUDE + frag));
+ gl.linkProgram(p);
+ if(!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
+ const u = {};
+ ['u_resolution','u_time','u_mouse','u_mouseActive','u_clickCount'].forEach(n=>u[n]=gl.getUniformLocation(p,n));
+ u.u_clicks = gl.getUniformLocation(p,'u_clicks[0]');
+ u.a_pos = gl.getAttribLocation(p,'a_pos');
+ return { prog:p, u };
+ }
+
+ // fullscreen quad
+ const buf = gl.createBuffer();
+ gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+ gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+
+ const programs = WP.map(w => makeProgram(w.frag));
+
+ // ---- state ----
+ let active = parseInt(localStorage.getItem('hl_wallpaper_index')||'0',10);
+ if(isNaN(active) || active<0 || active>=WP.length) active = 0;
+
+ const target = { x:0, y:0 }; // mouse target (centered /height, y-up)
+ const eased = { x:0, y:0 };
+ let mouseActive = 0; // 0..1
+ let lastMove = -10;
+ const clicks = []; // {x,y,start}
+ let dpr = Math.min(window.devicePixelRatio||1, 2);
+
+ function resize(){
+ dpr = Math.min(window.devicePixelRatio||1, 2);
+ const w = Math.floor(innerWidth*dpr), h = Math.floor(innerHeight*dpr);
+ if(canvas.width!==w || canvas.height!==h){ canvas.width=w; canvas.height=h; }
+ gl.viewport(0,0,canvas.width,canvas.height);
+ }
+ window.addEventListener('resize', resize);
+ resize();
+
+ function toSpace(clientX, clientY){
+ const h = innerHeight;
+ return { x:(clientX - innerWidth/2)/h, y:(innerHeight/2 - clientY)/h };
+ }
+
+ const cursor = document.getElementById('cursor');
+ function moveCursor(x,y){ cursor.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`; }
+
+ window.addEventListener('pointermove', e=>{
+ const s = toSpace(e.clientX, e.clientY);
+ target.x = s.x; target.y = s.y;
+ lastMove = performance.now()/1000;
+ cursor.style.opacity = '1';
+ moveCursor(e.clientX, e.clientY);
+ });
+ window.addEventListener('pointerleave', ()=>{ cursor.style.opacity='0'; });
+
+ function addClick(x,y){
+ clicks.push({ x, y, start: performance.now()/1000 });
+ while(clicks.length > MAXCLICKS) clicks.shift();
+ }
+ window.addEventListener('pointerdown', e=>{
+ if(e.target.closest('.dock')) return;
+ const s = toSpace(e.clientX, e.clientY);
+ addClick(s.x, s.y);
+ cursor.classList.add('tap');
+ setTimeout(()=>cursor.classList.remove('tap'), 260);
+ });
+
+ // ---- UI ----
+ const titleEl = document.getElementById('title');
+ const enEl = document.getElementById('en');
+ const dock = document.getElementById('dock');
+ WP.forEach((w,i)=>{
+ const b = document.createElement('button');
+ b.className = 'chip' + (i===active?' active':'');
+ b.innerHTML = `<span class="sw" style="background:${w.swatch}"></span><span class="lbl">${w.name}</span>`;
+ b.addEventListener('click', ()=>setActive(i));
+ dock.appendChild(b);
+ });
+ function setActive(i){
+ if(i===active) return;
+ active = i;
+ localStorage.setItem('hl_wallpaper_index', String(i));
+ [...dock.children].forEach((c,idx)=>c.classList.toggle('active', idx===i));
+ // graceful text swap
+ titleEl.classList.add('swap'); enEl.classList.add('swap');
+ setTimeout(()=>{
+ titleEl.textContent = WP[i].name; enEl.textContent = WP[i].en;
+ titleEl.classList.remove('swap'); enEl.classList.remove('swap');
+ }, 260);
+ }
+ titleEl.textContent = WP[active].name; enEl.textContent = WP[active].en;
+
+ window.addEventListener('keydown', e=>{
+ if(e.key>='1' && e.key<='5'){ const i=+e.key-1; if(i<WP.length) setActive(i); }
+ else if(e.key==='ArrowRight') setActive((active+1)%WP.length);
+ else if(e.key==='ArrowLeft') setActive((active-1+WP.length)%WP.length);
+ });
+
+ // ---- render loop ----
+ const clickBuf = new Float32Array(MAXCLICKS*4);
+ const t0 = performance.now();
+ function frame(){
+ const now = performance.now();
+ const time = (now - t0)/1000;
+
+ // ease mouse, slow, elegant trailing
+ eased.x += (target.x - eased.x)*0.07;
+ eased.y += (target.y - eased.y)*0.07;
+ // activity decays gently after movement stops
+ const sinceMove = time - lastMove;
+ const wantActive = Math.max(0, 1 - sinceMove*0.7);
+ mouseActive += (wantActive - mouseActive)*0.05;
+
+ // build click array (drop expired)
+ for(let i=clicks.length-1;i>=0;i--){ if(time - clicks[i].start > 7) clicks.splice(i,1); }
+ clickBuf.fill(0);
+ const n = Math.min(clicks.length, MAXCLICKS);
+ for(let i=0;i<n;i++){
+ const c=clicks[i];
+ clickBuf[i*4]=c.x; clickBuf[i*4+1]=c.y; clickBuf[i*4+2]=time-c.start; clickBuf[i*4+3]=1;
+ }
+
+ const { prog, u } = programs[active];
+ gl.useProgram(prog);
+ gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+ gl.enableVertexAttribArray(u.a_pos);
+ gl.vertexAttribPointer(u.a_pos, 2, gl.FLOAT, false, 0, 0);
+ gl.uniform2f(u.u_resolution, canvas.width, canvas.height);
+ gl.uniform1f(u.u_time, time);
+ gl.uniform2f(u.u_mouse, eased.x, eased.y);
+ gl.uniform1f(u.u_mouseActive, mouseActive);
+ gl.uniform1i(u.u_clickCount, n);
+ gl.uniform4fv(u.u_clicks, clickBuf);
+ gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+ requestAnimationFrame(frame);
+ }
+ requestAnimationFrame(frame);
+ })();
+ </script>
+</body>
+</html>

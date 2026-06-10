@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beheer, Klanten &amp; boekingen · The Healing Lounge</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="assets/healing.css">
+<link rel="stylesheet" href="assets/beheer.css">
+</head>
+<body data-page="beheer">
+ <div class="bh-topbar">
+ <a class="brand" href="index.html"><span class="mark">❀</span><span>The Healing Lounge<small data-nl="Beheer" data-en="Admin">Beheer</small></span></a>
+ <div class="qz-right" style="display:flex;align-items:center;gap:14px">
+ <div class="lang" role="group" aria-label="Taal / Language" style="display:inline-flex;align-items:center;border:1px solid var(--linen-deep);border-radius:999px;padding:2px">
+ <button data-lang="nl" style="background:none;border:0;padding:5px 11px;border-radius:999px;font-weight:600;font-size:12.5px"><span>NL</span></button>
+ <button data-lang="en" style="background:none;border:0;padding:5px 11px;border-radius:999px;font-weight:600;font-size:12.5px"><span>EN</span></button>
+ </div>
+ <a class="bh-close" href="index.html" aria-label="Sluiten" title="Sluiten">×</a>
+ </div>
+ </div>
+
+ <div class="bh-wrap">
+ <div id="bh-app"></div>
+ </div>
+
+ <script src="assets/treatments.js"></script>
+ <script src="assets/data/seed.js"></script>
+ <script src="assets/site.js"></script>
+ <script src="assets/beheer.js"></script>
+ <script>
+ document.querySelectorAll('.bh-topbar .lang button').forEach(function(b){
+ b.addEventListener('click', function(){ window.HL_setLang(b.dataset.lang); });
+ });
+ function startBeheer(){ if(window.HL_BEHEER_INIT) window.HL_BEHEER_INIT(); }
+ if(document.readyState!=='loading') startBeheer(); else window.addEventListener('DOMContentLoaded', startBeheer);
+ </script>
+</body>
+</html>

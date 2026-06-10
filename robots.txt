@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /beheer.html
+Disallow: /behandeling.html
+
+Sitemap: https://www.thehealinglounge.nl/sitemap.xml
