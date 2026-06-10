@@ -114,7 +114,7 @@
  chips.innerHTML=HL_CATS.map(c=>`<button class="chip ${c.id==='all'?'is-active':''}" data-filter="${c.id}" data-nl="${c.nl}" data-en="${c.en}">${c.nl}</button>`).join('');
  d.appendChild(chips);
  const grid=document.createElement('div'); grid.className='bk-grid';
- grid.innerHTML=HL_TREATMENTS.map(t=>{
+ grid.innerHTML=HL_TREATMENTS.filter(t=>!t.walkin).map(t=>{
  const cat=HL_CATS.find(c=>c.id===t.cat);
  const sel = state.treatmentId===t.id?' selected':'';
  const badge = t.allDay?'<span class="bk-badge rood" data-nl="Hele dag" data-en="All day">Hele dag</span>':(t.walkin?'<span class="bk-badge" data-nl="Walk-in" data-en="Walk-in">Walk-in</span>':'');

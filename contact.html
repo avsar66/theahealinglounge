@@ -33,12 +33,15 @@
  .map{ margin-top:60px; aspect-ratio:21/7; border-radius:var(--r-lg); min-height:240px; }
  .map .pin{ font-family:var(--serif); font-size:20px; color:var(--ink); display:flex; flex-direction:column; gap:6px; align-items:center; text-align:center; }
 
- .map-wrap{ position:relative; margin-top:60px; border-radius:var(--r-lg); overflow:hidden; min-height:300px; box-shadow:var(--shadow-sm); }
- .map-embed{ width:100%; height:380px; border:0; display:block; }
- .map-cta{ position:absolute; left:16px; bottom:16px; display:inline-flex; align-items:center; gap:9px; background:var(--espresso); color:var(--cream); border:0; border-radius:var(--r-pill); padding:13px 22px; font-weight:600; font-size:14.5px; cursor:pointer; box-shadow:var(--shadow-md); }
+ .map-wrap{ position:relative; margin-top:clamp(32px,6vw,60px); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--shadow-sm); }
+ @media (max-width:560px){ .map-cta{ left:50%; transform:translateX(-50%); bottom:12px; padding:11px 18px; font-size:13.5px; white-space:nowrap; } }
+ .map-embed{ width:100%; height:clamp(260px,62vw,380px); border:0; display:block; }
+ .map-tap{ position:absolute; inset:0; z-index:1; border:0; background:transparent; cursor:pointer; }
+ .map-cta{ position:absolute; left:16px; bottom:16px; z-index:2; display:inline-flex; align-items:center; gap:9px; background:var(--espresso); color:var(--cream); border:0; border-radius:var(--r-pill); padding:13px 22px; font-weight:700; font-size:14.5px; cursor:pointer; box-shadow:var(--shadow-md); pointer-events:auto; }
  .map-cta .ic{ color:var(--gold); font-size:17px; }
  .map-cta:hover{ background:var(--cocoa); }
  .nav-sheet{ position:fixed; inset:0; z-index:120; background:rgba(24,15,8,.5); display:flex; align-items:flex-end; justify-content:center; }
+ .nav-sheet[hidden]{ display:none; }
  .nav-card{ background:var(--paper); width:100%; max-width:440px; border-radius:var(--r-lg) var(--r-lg) 0 0; padding:24px; box-shadow:var(--shadow-lg); animation:navup .3s var(--ease); }
  @keyframes navup{ from{ transform:translateY(30px); opacity:0; } to{ transform:none; opacity:1; } }
  .nav-head{ display:flex; align-items:center; justify-content:space-between; }
@@ -111,7 +114,7 @@
  </div>
 
  <div class="container">
- <div class="map-wrap"><iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="The Healing Lounge op de kaart" src="https://www.google.com/maps?q=De%20Brouwerij%204%2C%203831%20ND%20Leusden&output=embed"></iframe><button class="map-cta nav-trigger" type="button"><span class="ic">⌖</span><span data-nl="Navigeer hierheen" data-en="Navigate here">Navigeer hierheen</span></button>
+ <div class="map-wrap"><iframe class="map-embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="The Healing Lounge op de kaart" src="https://www.google.com/maps?q=De%20Brouwerij%204%2C%203831%20ND%20Leusden&output=embed"></iframe><button class="map-tap nav-trigger" type="button" aria-label="Navigeer hierheen"></button><button class="map-cta nav-trigger" type="button"><span class="ic">⌖</span><span data-nl="Navigeer hierheen" data-en="Navigate here">Navigeer hierheen</span></button>
  
  </div>
  </div>
