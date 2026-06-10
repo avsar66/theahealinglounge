@@ -299,7 +299,7 @@
  function boot(){
  buildHeader();
  buildFooter();
- buildAssumptions();
+ /* ontwerp-aannames verborgen op verzoek */
  buildCookie();
  initReveal();
  applyLang(getLang());
