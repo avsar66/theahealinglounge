@@ -38,6 +38,7 @@
  <script src="assets/treatments.js"></script>
  <script src="assets/quiz-data.js"></script>
  <script src="wallpapers.js"></script>
+ <script src="assets/overrides.js"></script>
  <script src="assets/site.js"></script>
  <script src="assets/quiz.js"></script>
  <script>
@@ -48,7 +49,7 @@
  // mount the honey shader as a calm living backdrop
  (function(){
  var cv = document.getElementById('qz-canvas');
- function go(){ if(window.HLMountShader && cv) window.HLMountShader(cv, 'honey', {speed:0.6, maxDpr:1.4}); }
+ function go(){ if(window.HLMountShader && cv) window.HLMountShader(cv, 'honeyreal', {speed:0.55, maxDpr:1.4}); }
  if(document.readyState!=='loading') go(); else window.addEventListener('DOMContentLoaded', go);
  })();
  // boot quiz

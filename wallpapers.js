@@ -38,6 +38,60 @@ float vnoise(vec2 p){
 float fbm(vec2 p){ float s=0.,a=.5; for(int i=0;i<6;i++){ s+=a*vnoise(p); p=p*2.02+vec2(1.7,9.2); a*=.5; } return s; }
 `;
 
+/* 0 — Vloeibare Honing : thick, glossy, light-glinting real honey */
+const FRAG_HONEY_REAL = `
+// viscous domain-warped height field — the "body" of the honey
+float honeyH(vec2 uv){
+  float t = u_time*0.045;
+  vec2 p = uv*1.2;
+  vec2 q = vec2(fbm(p + vec2(0.0, t)), fbm(p + vec2(4.3, -t*0.8)));
+  vec2 r = vec2(fbm(p + 1.7*q + vec2(1.7,9.2) + 0.10*t),
+                fbm(p + 1.7*q + vec2(8.3,2.8) - 0.08*t));
+  float md = length(uv - u_mouse);
+  r += 0.16*normalize(uv - u_mouse + 1e-4)*exp(-md*1.5);
+  float h = fbm(p + 2.0*r);
+  for(int i=0;i<10;i++){ if(i>=u_clickCount) break;
+    vec4 c=u_clicks[i]; float d=length(uv-c.xy);
+    h += 0.05*sin(d*15.0 - c.z*5.0)*exp(-d*2.4)*exp(-c.z*1.1);
+  }
+  return h;
+}
+void main(){
+  vec2 uv = (gl_FragCoord.xy - 0.5*u_resolution.xy)/u_resolution.y;
+
+  // surface normal from the height field -> glossy lighting
+  float e = 0.0032;
+  float h  = honeyH(uv);
+  float hx = honeyH(uv+vec2(e,0.0)) - h;
+  float hy = honeyH(uv+vec2(0.0,e)) - h;
+  vec3 n = normalize(vec3(-hx, -hy, 2.0*e*5.5));
+
+  vec3 L  = normalize(vec3(0.32, 0.5, 0.78));   // key light
+  vec3 L2 = normalize(vec3(-0.55,-0.28,0.62));  // rim glint
+  float dif   = clamp(dot(n,L),0.0,1.0);
+  float spec  = pow(clamp(dot(reflect(-L , n), vec3(0.0,0.0,1.0)),0.0,1.0), 42.0);
+  float glint = pow(clamp(dot(reflect(-L2, n), vec3(0.0,0.0,1.0)),0.0,1.0), 110.0);
+
+  // amber depth ramp — thin honey is dark amber, thick honey glows gold
+  float f = clamp(h*1.08, 0.0, 1.0);
+  vec3 deepAmber = vec3(0.34,0.15,0.03);
+  vec3 amber     = vec3(0.60,0.31,0.07);
+  vec3 col = mix(espresso, deepAmber, smoothstep(0.00,0.40,f));
+  col = mix(col, amber,    smoothstep(0.30,0.62,f));
+  col = mix(col, honey,    smoothstep(0.55,0.84,f));
+  col = mix(col, gold,     smoothstep(0.80,1.00,f));
+
+  col *= 0.68 + 0.52*dif;                         // viscous body shading
+  col += honey*0.14*smoothstep(0.42,1.0,f);       // translucent inner glow
+  col += gold*spec*1.15;                          // glossy sheen
+  col += vec3(1.0,0.96,0.86)*glint*0.95;          // sharp light glints
+  float md = length(uv-u_mouse);
+  col += gold*0.30*exp(-md*2.2)*u_mouseActive;    // warm pull under cursor
+  col *= 1.0 - 0.30*dot(uv,uv);                   // vignette
+  gl_FragColor = vec4(col,1.0);
+}
+`;
+
 /* 1 — Honingstroom : domain-warped flowing honey */
 const FRAG_HONEY = `
 void main(){
@@ -198,6 +252,8 @@ void main(){
 `;
 
 window.HL_WALLPAPERS = [
+  { id:'honeyreal', name:'Vloeibare Honing', en:'Liquid Honey', frag:FRAG_HONEY_REAL,
+    swatch:'linear-gradient(135deg,#241910,#B0732A 55%,#EBC985)' },
   { id:'honey',  name:'Honingstroom', en:'Honey Flow',  frag:FRAG_HONEY,
     swatch:'linear-gradient(135deg,#261A11,#D18C3D 60%,#EBC985)' },
   { id:'aurora', name:'Aurora',       en:'Aurora',      frag:FRAG_AURORA,
