@@ -280,7 +280,7 @@
  window.open('https://wa.me/?text='+encodeURIComponent(shareText+' '+SHARE_URL),'_blank');
  });
  p.querySelector('#sh-copy').addEventListener('click',()=>copyLink(p));
- p.querySelector('#sh-img').addEventListener('click',()=>downloadCard(name, why));
+ p.querySelector('#sh-img').addEventListener('click',()=>downloadCard(name, why, expect, benefits));
 
  p.querySelector('#qz-restart').addEventListener('click',restart);
  return p;
@@ -293,45 +293,61 @@
  }
 
  // ---------- shareable image (canvas, no external assets → never tainted) ----------
- function downloadCard(name, why){
- const W=1080, H=1350;
+ function downloadCard(name, why, expect, benefits){
+ benefits = benefits || [];
+ const W=1080, H=1350, PAD=92, CW=W-PAD*2;
  const cv=document.createElement('canvas'); cv.width=W; cv.height=H;
  const ctx=cv.getContext('2d');
- // background
+
+ function drawWrapped(text, x, y, maxW, lh, max){
+ const lines=wrapText(ctx, text, maxW);
+ const use = max?lines.slice(0,max):lines;
+ use.forEach(line=>{ ctx.fillText(line, x, y); y+=lh; });
+ return y;
+ }
+ function drawBackground(){
  const g=ctx.createLinearGradient(0,0,W,H); g.addColorStop(0,'#241910'); g.addColorStop(1,'#180F08');
  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
- // honey glow
- const rg=ctx.createRadialGradient(W*0.8,H*0.18,40,W*0.8,H*0.18,560);
- rg.addColorStop(0,'rgba(188,129,58,0.42)'); rg.addColorStop(1,'rgba(188,129,58,0)');
+ const rg=ctx.createRadialGradient(W*0.82,H*0.14,40,W*0.82,H*0.14,620);
+ rg.addColorStop(0,'rgba(188,129,58,0.40)'); rg.addColorStop(1,'rgba(188,129,58,0)');
  ctx.fillStyle=rg; ctx.fillRect(0,0,W,H);
- const PAD=92;
- // brand mark
- ctx.strokeStyle='#D7B877'; ctx.lineWidth=3;
- ctx.beginPath(); ctx.arc(PAD+38,PAD+38,38,0,Math.PI*2); ctx.stroke();
- ctx.fillStyle='#D7B877'; ctx.textBaseline='middle'; ctx.textAlign='center';
- ctx.font='34px "Cormorant Garamond", Georgia, serif';
- ctx.fillText('\u2740', PAD+38, PAD+40);
- ctx.textAlign='left';
- ctx.fillStyle='#F3ECDE'; ctx.font='500 40px "Cormorant Garamond", Georgia, serif';
- ctx.fillText('The Healing Lounge', PAD, PAD+108);
- ctx.fillStyle='#C9B89E'; ctx.font='600 18px "Mulish", sans-serif';
- ctx.fillText('L E U S D E N', PAD, PAD+146);
+ ctx.textBaseline='alphabetic'; ctx.textAlign='left';
+ }
+ function drawContent(y){
  // eyebrow
- ctx.fillStyle='#D7B877'; ctx.font='600 26px "Mulish", sans-serif';
- ctx.fillText((L()==='nl'?'JOUW MATCH':'YOUR MATCH'), PAD, H-560);
- // treatment name (wrap)
- ctx.fillStyle='#F3ECDE'; ctx.font='500 92px "Cormorant Garamond", Georgia, serif';
- const nameLines=wrapText(ctx, name, W-PAD*2);
- let y=H-470;
- nameLines.forEach(line=>{ ctx.fillText(line, PAD, y); y+=96; });
- // why (wrap)
- ctx.fillStyle='rgba(243,236,222,0.85)'; ctx.font='400 34px "Mulish", sans-serif';
- y+=20;
- wrapText(ctx, why, W-PAD*2).slice(0,4).forEach(line=>{ ctx.fillText(line, PAD, y); y+=48; });
+ ctx.fillStyle='#D7B877'; ctx.font='600 25px "Mulish", sans-serif';
+ ctx.fillText((L()==='nl'?'JOUW PERSOONLIJKE MATCH':'YOUR PERSONAL MATCH'), PAD, y); y+=54;
+ // name
+ ctx.fillStyle='#F3ECDE'; ctx.font='500 80px "Cormorant Garamond", Georgia, serif';
+ y = drawWrapped(name, PAD, y, CW, 82, 2);
+ // why
+ y+=18;
+ ctx.fillStyle='rgba(243,236,222,0.82)'; ctx.font='400 33px "Mulish", sans-serif';
+ y = drawWrapped(why, PAD, y, CW, 46, 3);
+ // divider
+ y+=30; ctx.strokeStyle='rgba(215,184,119,0.45)'; ctx.lineWidth=2;
+ ctx.beginPath(); ctx.moveTo(PAD,y); ctx.lineTo(PAD+96,y); ctx.stroke(); y+=44;
+ // what it is
+ ctx.fillStyle='#D7B877'; ctx.font='600 23px "Mulish", sans-serif';
+ ctx.fillText((L()==='nl'?'WAT HET IS':'WHAT IT IS'), PAD, y); y+=42;
+ ctx.fillStyle='rgba(243,236,222,0.92)'; ctx.font='400 31px "Mulish", sans-serif';
+ y = drawWrapped(expect||'', PAD, y, CW, 44, 3);
+ // what it does for you
+ y+=40;
+ ctx.fillStyle='#D7B877'; ctx.font='600 23px "Mulish", sans-serif';
+ ctx.fillText((L()==='nl'?'WAT HET VOOR JE DOET':'WHAT IT DOES FOR YOU'), PAD, y); y+=46;
+ benefits.slice(0,3).forEach(b=>{
+ ctx.fillStyle='#D7B877'; ctx.font='600 30px "Mulish", sans-serif';
+ ctx.fillText('\u2713', PAD, y);
+ ctx.fillStyle='rgba(243,236,222,0.92)'; ctx.font='400 31px "Mulish", sans-serif';
+ const ny = drawWrapped(b, PAD+46, y, CW-46, 40, 2);
+ y = ny + 16;
+ });
  // footer
  ctx.fillStyle='#D7B877'; ctx.font='600 26px "Mulish", sans-serif';
  ctx.fillText(T('Doe de quiz \u00b7 thehealinglounge.nl', 'Take the quiz \u00b7 thehealinglounge.nl'), PAD, H-PAD);
-
+ }
+ function exportCard(){
  cv.toBlob(blob=>{
  const a=document.createElement('a');
  a.href=URL.createObjectURL(blob);
@@ -339,6 +355,29 @@
  document.body.appendChild(a); a.click(); a.remove();
  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
  },'image/png');
+ }
+ function start(){
+ // echte huisstijl-logo (lichte versie, transparant) — zelfde origin dus geen taint
+ const logo=new Image();
+ logo.onload=()=>{
+ drawBackground();
+ const lw=360, lh=lw*((logo.naturalHeight/logo.naturalWidth)||0.355);
+ ctx.drawImage(logo, PAD, PAD-4, lw, lh);
+ drawContent(PAD - 4 + lh + 64);
+ exportCard();
+ };
+ logo.onerror=()=>{
+ drawBackground();
+ ctx.fillStyle='#F3ECDE'; ctx.font='500 52px "Cormorant Garamond", Georgia, serif';
+ ctx.fillText('The Healing Lounge', PAD, PAD+56);
+ ctx.fillStyle='#C9B89E'; ctx.font='600 18px "Mulish", sans-serif';
+ ctx.fillText('W E L L - B E I N G   H O U S E', PAD, PAD+92);
+ drawContent(PAD+150);
+ exportCard();
+ };
+ logo.src='assets/brand/logo-white.png';
+ }
+ (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(start, start);
  }
  function wrapText(ctx, text, maxW){
  const words=(text||'').split(' '); const lines=[]; let line='';

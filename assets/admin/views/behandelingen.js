@@ -50,6 +50,54 @@
     function syncBuf(){ bufRow.querySelector('#t-bufwrap').style.opacity = bufRow.querySelector('#t-bufon').checked?'1':'.4'; }
     bufRow.querySelector('#t-bufon').onchange=syncBuf; syncBuf();
 
+    /* ---- Actie / tijdelijke aanbieding (gedeeld met de publieke site via HLOverrides) ---- */
+    const OVp = window.HLOverrides;
+    const promo = Object.assign({on:false,type:'percent',value:10,labelNl:'Actie',labelEn:'Sale',startISO:'',endISO:''}, (OVp&&OVp.promos.get(t.id))||{});
+    body.appendChild(window.h('<div class="adm-section-title">Actie / aanbieding</div>'));
+    const promoCard=window.h(`<div class="adm-card" style="padding:18px 20px">
+      <label style="display:flex;gap:12px;align-items:center"><span class="sw"><input type="checkbox" id="pr-on" ${promo.on?'checked':''}><span class="tr"></span></span><span><b>Deze behandeling in de actie zetten</b><div class="muted" style="font-size:13px">Toont automatisch een actie-label op de homepage én op de behandelpagina, alleen binnen de periode die je kiest. Werkt voor elke behandeling.</div></span></label>
+      <div id="pr-body" style="margin-top:14px">
+        <div class="field-row">
+          <div class="adm-field"><label>Soort actie</label><select id="pr-type">
+            <option value="percent"${promo.type==='percent'?' selected':''}>Korting in % </option>
+            <option value="amount"${promo.type==='amount'?' selected':''}>Korting in €</option>
+            <option value="none"${promo.type==='none'?' selected':''}>Alleen label (geen korting)</option>
+          </select></div>
+          <div class="adm-field" id="pr-valwrap"><label id="pr-vallbl">Korting (%)</label><input id="pr-val" type="number" min="0" step="1" value="${promo.value}"></div>
+        </div>
+        <div class="bilingual"><div class="adm-field"><label>Label (NL)</label><input id="pr-lnl" value="${esc(promo.labelNl)}" placeholder="Actie"></div><div class="adm-field"><label>Label (EN)</label><input id="pr-len" value="${esc(promo.labelEn)}" placeholder="Sale"></div></div>
+        <div class="field-row">
+          <div class="adm-field"><label>Startdatum (leeg = direct)</label><input id="pr-start" type="date" value="${promo.startISO||''}"></div>
+          <div class="adm-field"><label>Einddatum (leeg = doorlopend)</label><input id="pr-end" type="date" value="${promo.endISO||''}"></div>
+        </div>
+        <div class="muted" id="pr-prev" style="font-size:13.5px;padding:11px 13px;background:var(--adm-bg);border-radius:9px"></div>
+      </div>
+    </div>`);
+    body.appendChild(promoCard);
+    function prRead(){ promo.on=promoCard.querySelector('#pr-on').checked; promo.type=promoCard.querySelector('#pr-type').value; promo.value=+promoCard.querySelector('#pr-val').value||0; promo.labelNl=promoCard.querySelector('#pr-lnl').value.trim()||'Actie'; promo.labelEn=promoCard.querySelector('#pr-len').value.trim()||'Sale'; promo.startISO=promoCard.querySelector('#pr-start').value; promo.endISO=promoCard.querySelector('#pr-end').value; }
+    function prSync(){
+      prRead();
+      promoCard.querySelector('#pr-body').style.opacity=promo.on?'1':'.45';
+      promoCard.querySelector('#pr-valwrap').style.display=promo.type==='none'?'none':'';
+      promoCard.querySelector('#pr-vallbl').textContent=promo.type==='amount'?'Korting (€)':'Korting (%)';
+      const base=+body.querySelector('#t-price').value||t.price; let line;
+      if(!promo.on){ line='Geen actie actief voor deze behandeling.'; }
+      else {
+        let pl;
+        if(promo.type==='percent'){ const np=Math.round(base*(1-(promo.value||0)/100)); pl='€ '+base+' → € '+np+'  (−'+(promo.value||0)+'%)'; }
+        else if(promo.type==='amount'){ const np=Math.max(0,base-(promo.value||0)); pl='€ '+base+' → € '+np+'  (−€ '+(promo.value||0)+')'; }
+        else pl='Alleen label · prijs blijft € '+base;
+        const today=new Date().toISOString().slice(0,10); let st='● Loopt nu';
+        if(promo.startISO && today<promo.startISO) st='◷ Gepland vanaf '+promo.startISO;
+        else if(promo.endISO && today>promo.endISO) st='○ Periode afgelopen ('+promo.endISO+')';
+        else if(promo.endISO) st='● Loopt t/m '+promo.endISO;
+        line='“'+promo.labelNl+'” · '+pl+' · '+st;
+      }
+      promoCard.querySelector('#pr-prev').textContent=line;
+    }
+    promoCard.querySelectorAll('#pr-on,#pr-type,#pr-val,#pr-lnl,#pr-len,#pr-start,#pr-end').forEach(elp=>{ elp.oninput=prSync; elp.onchange=prSync; });
+    prSync();
+
     // staff coupling (mirror of medewerkers)
     body.appendChild(window.h('<div class="adm-section-title">Toegestane medewerkers</div>'));
     const staffWrap=window.h('<div class="svc-pick"></div>');
@@ -78,6 +126,7 @@
       dd.staff.forEach(s=>{ if(!s.services[t.id]) s.services[t.id]={enabled:false,durationOverride:null}; s.services[t.id].enabled=t.staffIds.includes(s.id); });
       if(isNew){ dd.treatments.push(t); dd.staff.forEach(s=>{ if(!s.services[t.id]) s.services[t.id]={enabled:t.staffIds.includes(s.id),durationOverride:null}; }); A.log('treatment','Nieuwe behandeling: '+t.nl.name); }
       else { const i=dd.treatments.findIndex(x=>x.id===t.id); dd.treatments[i]=t; A.log('treatment','Behandeling bijgewerkt: '+t.nl.name); }
+      if(window.HLOverrides){ prRead(); window.HLOverrides.promos.set(t.id, promo.on?{on:true,type:promo.type,value:promo.value,labelNl:promo.labelNl,labelEn:promo.labelEn,startISO:promo.startISO,endISO:promo.endISO}:null); A.log('treatment', (promo.on?'Actie ingesteld':'Actie verwijderd')+': '+t.nl.name); }
       A.save(); window.admCloseOverlay(); window.HLA_UI.toast('Opgeslagen');
     };
     window.HLA_UI.drawer(isNew?'Nieuwe behandeling':t.nl.name, body, foot);
