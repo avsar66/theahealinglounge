@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behandeling · The Healing Lounge</title>
+<meta name="robots" content="noindex, follow">
+<link rel="stylesheet" href="assets/healing.css">
+<style>
+ .detail-hero{ position:relative; min-height:72vh; display:flex; align-items:flex-end; overflow:hidden; }
+ .detail-hero .photo{ position:absolute; inset:0; }
+ .detail-hero .photo img{ width:100%; height:100%; object-fit:cover; }
+ .detail-hero .photo::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,15,8,.4), rgba(24,15,8,.2) 40%, rgba(24,15,8,.8)); }
+ .detail-hero .inner{ position:relative; z-index:2; color:var(--cream); padding-bottom:clamp(40px,6vw,72px); padding-top:130px; max-width:760px; }
+ .detail-hero h1{ color:var(--cream); margin:16px 0 14px; font-size:clamp(38px,5.4vw,68px); }
+ .detail-hero p{ color:rgba(243,236,222,.9); max-width:50ch; font-size:18px; }
+ .crumb{ font-size:13px; letter-spacing:.06em; color:rgba(243,236,222,.7); margin-bottom:6px; }
+ .crumb a:hover{ color:var(--gold); }
+
+ .detail-body{ display:grid; grid-template-columns:1.6fr 1fr; gap:clamp(36px,5vw,72px); align-items:start; }
+ .detail-body h2{ font-size:clamp(24px,2.6vw,32px); margin:0 0 18px; }
+ .expect{ list-style:none; padding:0; margin:24px 0 0; display:flex; flex-direction:column; gap:14px; }
+ .expect li{ display:flex; gap:14px; align-items:flex-start; }
+ .expect .b{ width:9px; height:9px; border-radius:50%; background:var(--honey); margin-top:9px; flex:none; }
+ .know{ background:var(--linen); border-radius:var(--r-lg); padding:26px 30px; margin-top:34px; }
+ .know h3{ font-size:20px; margin-bottom:10px; }
+
+ /* booking card */
+ .book-card{ position:sticky; top:96px; background:var(--paper); border:1px solid var(--linen-deep); border-radius:var(--r-lg); box-shadow:var(--shadow-md); padding:30px 30px 32px; }
+ .book-card .price{ font-family:var(--serif); font-size:42px; line-height:1; color:var(--ink); }
+ .book-card .price small{ font-family:var(--sans); font-size:14px; color:var(--ink-soft); font-weight:500; }
+ .spec{ display:flex; flex-direction:column; gap:0; margin:24px 0; }
+ .spec .row{ display:flex; justify-content:space-between; gap:14px; padding:13px 0; border-bottom:1px solid var(--linen-deep); font-size:14.5px; }
+ .spec .row:last-child{ border-bottom:0; }
+ .spec .k{ color:var(--ink-soft); letter-spacing:.03em; }
+ .spec .v{ font-weight:600; text-align:right; }
+ .doc-pill{ display:inline-flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; padding:6px 13px; border-radius:var(--r-pill); }
+ .doc-A{ background:rgba(176,84,63,.12); color:var(--rood); }
+ .doc-B{ background:rgba(188,129,58,.14); color:var(--honey); }
+ .doc-C{ background:var(--linen-deep); color:var(--ink-soft); }
+ .trust{ display:flex; gap:10px; align-items:flex-start; margin-top:18px; font-size:13px; color:var(--ink-soft); line-height:1.5; }
+
+ .related-grid{ grid-template-columns:repeat(3,1fr); margin-top:40px; }
+
+ @media (max-width:900px){
+ .detail-body{ grid-template-columns:1fr; }
+ .book-card{ position:static; }
+ .related-grid{ grid-template-columns:1fr; }
+ }
+</style>
+</head>
+<body data-page="treatments">
+ <header data-site-header data-on-dark></header>
+
+ <section class="detail-hero" id="hero" data-screen-label="Behandeldetail hero">
+ <div class="photo"><img id="hero-img" src="" alt="" onerror="this.classList.add('img-failed')"></div>
+ <div class="container inner">
+ <div class="crumb"><a href="behandelingen.html" data-nl="Behandelingen" data-en="Treatments">Behandelingen</a> · <span id="crumb-cat"></span></div>
+ <span class="eyebrow on-dark" id="hero-cat"></span>
+ <h1 id="hero-name"></h1>
+ <p id="hero-desc"></p>
+ </div>
+ </section>
+
+ <section class="section">
+ <div class="container detail-body">
+ <div>
+ <h2 data-nl="Over deze behandeling" data-en="About this treatment">Over deze behandeling</h2>
+ <p class="lead" id="long-desc"></p>
+ <p id="long-desc2" class="muted"></p>
+
+ <h2 style="margin-top:40px" data-nl="Wat je kunt verwachten" data-en="What to expect">Wat je kunt verwachten</h2>
+ <ul class="expect" id="expect"></ul>
+
+ <div class="know" id="know">
+ <h3 data-nl="Goed om te weten" data-en="Good to know">Goed om te weten</h3>
+ <p id="know-text" class="muted" style="margin:0"></p>
+ </div>
+ </div>
+
+ <aside>
+ <div class="book-card">
+ <span class="eyebrow" id="bc-cat"></span>
+ <h3 style="margin:10px 0 18px" id="bc-name"></h3>
+ <div class="price">€ <span id="bc-price"></span> <small id="bc-dur"></small></div>
+ <div class="spec" id="bc-spec"></div>
+ <a class="btn btn-gold btn-block btn-lg" id="bc-book" href="#" data-nl="Boek deze behandeling" data-en="Book this treatment">Boek deze behandeling</a>
+ <div class="trust">
+ <span style="color:var(--honey)">✦</span>
+ <span data-nl="Geen vooruitbetaling, je rekent rustig af in de salon, ná je behandeling." data-en="No prepayment, you settle calmly at the salon, after your treatment.">Geen vooruitbetaling, je rekent rustig af in de salon, ná je behandeling.</span>
+ </div>
+ </div>
+ </aside>
+ </div>
+ </section>
+
+ <section class="section" style="padding-top:0">
+ <div class="container">
+ <h2 data-nl="Misschien ook iets voor jou" data-en="You might also like">Misschien ook iets voor jou</h2>
+ <div class="grid related-grid" id="related"></div>
+ </div>
+ </section>
+
+ <footer data-site-footer></footer>
+
+ <script src="assets/treatments.js"></script>
+ <script src="wallpapers.js"></script>
+ <script src="assets/site.js"></script>
+ <script>
+ (function(){
+ const params=new URLSearchParams(location.search);
+ const id=params.get('id')||'royal-face';
+ if(window.HL_SLUG && window.HL_SLUG[id]){ location.replace(window.HL_SLUG[id]+'.html'); return; }
+ const t=HL_treatment(id)||HL_TREATMENTS[0];
+ const cat=HL_CATS.find(c=>c.id===t.cat);
+
+ function set(el,nl,en){ const e=typeof el==='string'?document.getElementById(el):el; e.setAttribute('data-nl',nl); e.setAttribute('data-en',en); e.textContent=nl; }
+
+ document.getElementById('hero-img').src=t.photo;
+ set('crumb-cat',cat.nl,cat.en);
+ set('hero-cat',cat.nl,cat.en);
+ set('hero-name',t.nl.name,t.en.name);
+ set('hero-desc',t.nl.desc,t.en.desc);
+ set('long-desc',t.nl.desc,t.en.desc);
+ set('long-desc2',
+ 'In een serene, warme ruimte nemen we ruim de tijd voor je. Elke behandeling begint met een kort, persoonlijk gesprek zodat we kunnen afstemmen op wat jij op dit moment nodig hebt.',
+ 'In a serene, warm space we take ample time for you. Every treatment begins with a short, personal conversation so we can attune to what you need right now.');
+ set('bc-cat',cat.nl,cat.en);
+ set('bc-name',t.nl.name,t.en.name);
+ document.getElementById('bc-price').textContent=t.price;
+ set('bc-dur','· '+t.dur+' min','· '+t.dur+' min');
+ document.getElementById('bc-book').href='boeken.html?treatment='+t.id;
+
+ // expectation points (warm, generic but tasteful)
+ const expects=[
+ ['Een rustige ontvangst met thee en een kort intakegesprek.','A calm welcome with tea and a short intake conversation.'],
+ [t.dur+' minuten volledige aandacht, in gedimd licht.', t.dur+' minutes of complete attention, in dimmed light.'],
+ ['Persoonlijk advies en nazorgtips om thuis door te zetten.','Personal advice and aftercare tips to continue at home.'],
+ ];
+ document.getElementById('expect').innerHTML=expects.map(e=>`<li><span class="b"></span><span data-nl="${e[0]}" data-en="${e[1]}">${e[0]}</span></li>`).join('');
+
+ // booking spec rows
+ const staffTxt = t.staff.length===0
+ ? ['Zelfstandig, geen medewerker nodig','Independent, no staff needed']
+ : (t.staff.length>1 ? ['Chantal of Maaike','Chantal or Maaike'] : ['Chantal','Chantal']);
+ const roomTxt = t.room==='rood'?['Rode Licht Ruimte','Red Light Room'] : t.room==='zon'?['Zonnestudio','Tanning Studio'] : ['Behandelruimte','Treatment Room'];
+ const docTxt = {A:['Ondertekening vereist','Signature required'],B:['Aandachtspunten inzien','Read the guidelines'],C:['Geen document','No document']}[t.doc];
+ const spec=document.getElementById('bc-spec');
+ spec.innerHTML=`
+ <div class="row"><span class="k" data-nl="Duur" data-en="Duration">Duur</span><span class="v">${t.dur} min</span></div>
+ <div class="row"><span class="k" data-nl="Ruimte" data-en="Room">Ruimte</span><span class="v" data-nl="${roomTxt[0]}" data-en="${roomTxt[1]}">${roomTxt[0]}</span></div>
+ <div class="row"><span class="k" data-nl="Behandelaar" data-en="Therapist">Behandelaar</span><span class="v" data-nl="${staffTxt[0]}" data-en="${staffTxt[1]}">${staffTxt[0]}</span></div>
+ <div class="row"><span class="k" data-nl="Document" data-en="Document">Document</span><span class="doc-pill doc-${t.doc}" data-nl="${docTxt[0]}" data-en="${docTxt[1]}">${docTxt[0]}</span></div>`;
+
+ // know text per doc-flow
+ const know={
+ A:['Voor deze behandeling onderteken je vooraf een korte contra-indicatieverklaring. Scheer of wax 24 uur vooraf niet, en drink na afloop voldoende water.','For this treatment you sign a short contra-indication statement beforehand. Do not shave or wax 24 hours prior, and drink plenty of water afterwards.'],
+ B:['Je leest vooraf de aandachtspunten door en bevestigt dat je ze begrepen hebt. Geen zonnebank binnen 24 uur na de behandeling.','You read the guidelines beforehand and confirm you understood them. No sunbed within 24 hours after the treatment.'],
+ C:['Geen voorbereiding nodig. Kom op je gemak langs en wij zorgen voor de rest.','No preparation needed. Drop by at your ease and we take care of the rest.'],
+ }[t.doc];
+ set('know-text',know[0],know[1]);
+
+ // related
+ const rel=HL_TREATMENTS.filter(x=>x.cat===t.cat && x.id!==t.id).slice(0,3);
+ const relList = rel.length?rel:HL_TREATMENTS.filter(x=>x.featured&&x.id!==t.id).slice(0,3);
+ document.getElementById('related').innerHTML=relList.map(r=>{
+ const rc=HL_CATS.find(c=>c.id===r.cat);
+ return `<a class="treat-card" href="behandeling.html?id=${r.id}">
+ <div class="photo" style="aspect-ratio:4/3.1"><img src="${r.photo}" alt="" loading="lazy" onerror="this.classList.add('img-failed')"></div>
+ <div class="body">
+ <span class="tag"><span class="dot"></span><span data-nl="${rc.nl}" data-en="${rc.en}">${rc.nl}</span></span>
+ <h3 data-nl="${r.nl.name}" data-en="${r.en.name}">${r.nl.name}</h3>
+ <div class="meta-row"><span class="price">€ ${r.price}</span><span class="dur">${r.dur} min</span></div>
+ </div></a>`;
+ }).join('');
+
+ document.title = t.nl.name+' · The Healing Lounge';
+ window.HL_setLang(window.HL_getLang());
+ })();
+ </script>
+</body>
+</html>

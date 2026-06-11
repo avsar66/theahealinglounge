@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Healing Lounge · Wellness & Zonnestudio · Leusden</title>
+<meta name="description" content="Luxe wellness & zonnestudio in Leusden. Gezichtsbehandelingen, honingmassages, cupping, therapieën en rood licht. Boek direct online, betaal rustig in de salon.">
+<link rel="canonical" href="https://www.thehealinglounge.nl/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Healing Lounge">
+<meta property="og:title" content="The Healing Lounge · Wellness & Zonnestudio · Leusden">
+<meta property="og:description" content="Rust voor lichaam en geest. Gezichtsbehandelingen, honingmassages, cupping en therapieën in het hart van Leusden.">
+<meta property="og:url" content="https://www.thehealinglounge.nl/">
+<meta property="og:image" content="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/banner1.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HealthAndBeautyBusiness","name":"The Healing Lounge","image":"https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/banner1.png","@id":"https://www.thehealinglounge.nl/","url":"https://www.thehealinglounge.nl/","telephone":"+31613761673","email":"info@thehealinglounge.nl","priceRange":"€€","paymentAccepted":"Cash, PIN","address":{"@type":"PostalAddress","streetAddress":"De Brouwerij 4","postalCode":"3831 ND","addressLocality":"Leusden","addressCountry":"NL"},"geo":{"@type":"GeoCoordinates","latitude":52.1316,"longitude":5.4286},"areaServed":{"@type":"City","name":"Leusden"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":"Monday","opens":"12:00","closes":"20:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"10:00","closes":"20:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"10:00","closes":"15:30"}],"sameAs":["https://www.instagram.com/thehealinglounge_/","https://www.tiktok.com/@thehealinglounge_"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"The Healing Lounge","url":"https://www.thehealinglounge.nl/","inLanguage":["nl","en"]}
+</script>
+<link rel="stylesheet" href="assets/healing.css">
+<style>
+ /* ---- homepage-specific ---- */
+ .hero{ position:relative; min-height:96vh; display:flex; align-items:flex-end; overflow:hidden; }
+ .hero .bg{ position:absolute; inset:0; }
+ .hero .bg img{ width:100%; height:100%; object-fit:cover; }
+ .hero .bg::after{ content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(24,15,8,.42) 0%, rgba(24,15,8,.12) 32%, rgba(24,15,8,.55) 78%, rgba(24,15,8,.82) 100%); }
+ .hero .inner{ position:relative; z-index:2; color:var(--cream); padding-bottom:clamp(56px,8vw,104px); padding-top:140px; max-width:880px; }
+ .hero .display{ color:var(--cream); margin:18px 0 22px; font-size:clamp(54px,9vw,96px); }
+ .hero p{ color:rgba(243,236,222,.92); max-width:54ch; font-size:clamp(19px,4.6vw,22px); line-height:1.6; }
+ .hero .cta-row{ display:flex; gap:16px; flex-wrap:wrap; margin-top:34px; }
+ .scroll-cue{ position:absolute; left:50%; bottom:26px; transform:translateX(-50%); z-index:2; color:var(--cream); opacity:.6; font-size:11px; letter-spacing:.3em; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; }
+ .scroll-cue .line{ width:1px; height:42px; background:linear-gradient(var(--cream), transparent); animation:cue 2.4s var(--ease) infinite; }
+ @keyframes cue{ 0%{transform:scaleY(0);transform-origin:top} 40%{transform:scaleY(1);transform-origin:top} 60%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+ /* manifesto */
+ .manifesto{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,90px); align-items:center; }
+ .manifesto .big{ font-family:var(--serif); font-size:clamp(26px,3.1vw,40px); line-height:1.28; font-weight:500; color:var(--ink); }
+ .manifesto .big em{ color:var(--honey); }
+ .sign{ font-family:var(--serif); font-style:italic; font-size:21px; color:var(--ink-soft); margin-top:18px; }
+
+ /* featured */
+ .feat-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:44px; }
+ .feat-grid{ grid-template-columns:repeat(4,1fr); }
+ .more-link{ font-weight:600; font-size:14.5px; letter-spacing:.04em; color:var(--ink); display:inline-flex; gap:8px; align-items:center; border-bottom:1px solid var(--honey); padding-bottom:3px; }
+ .more-link:hover{ gap:13px; }
+
+ /* rood licht band */
+ .rood-band{ position:relative; overflow:hidden; }
+ .rood-band .glow{ position:absolute; right:-10%; top:-30%; width:60%; height:160%; background:radial-gradient(circle, rgba(176,84,63,.5), transparent 62%); filter:blur(20px); }
+ .rood-band .inner{ position:relative; display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:center; }
+ .rood-band .badge{ display:inline-flex; align-items:center; gap:10px; background:rgba(176,84,63,.16); border:1px solid rgba(201,116,94,.5); color:var(--rood-soft); padding:8px 16px; border-radius:var(--r-pill); font-size:12.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+
+ /* philosophy / shader */
+ .ritueel{ position:relative; min-height:78vh; display:grid; place-items:center; overflow:hidden; background:var(--espresso-900); }
+ .ritueel canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+ .ritueel::after{ content:''; position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(24,15,8,.1), rgba(24,15,8,.66) 80%); pointer-events:none; }
+ .ritueel .inner{ position:relative; z-index:2; text-align:center; max-width:720px; padding:60px 24px; pointer-events:none; }
+ .ritueel .quote{ font-family:var(--serif); font-size:clamp(30px,4.4vw,58px); line-height:1.16; color:var(--gold-soft); font-weight:500; }
+ .ritueel .sub{ color:rgba(232,211,164,.75); margin-top:24px; font-size:15px; letter-spacing:.06em; }
+ .ritueel .hint{ position:absolute; bottom:22px; left:50%; transform:translateX(-50%); z-index:3; color:rgba(232,211,164,.5); font-size:11px; letter-spacing:.24em; text-transform:uppercase; }
+
+ /* pillars */
+ .pillars{ grid-template-columns:repeat(3,1fr); gap:clamp(28px,4vw,64px); }
+ .pillar .num{ font-family:var(--serif); font-size:34px; color:var(--honey); line-height:1; }
+ .pillar h3{ margin:16px 0 10px; }
+ .pillar .rule-gold{ margin:18px 0; }
+
+ /* review */
+ .review{ text-align:center; max-width:760px; margin-inline:auto; }
+ .stars{ color:var(--honey); letter-spacing:.3em; font-size:20px; margin-bottom:22px; }
+ .review .q{ font-family:var(--serif); font-size:clamp(24px,3vw,36px); line-height:1.3; color:var(--ink); }
+ .review .who{ margin-top:22px; font-size:14px; letter-spacing:.06em; color:var(--ink-soft); }
+
+ /* cta band */
+ .cta-band{ position:relative; overflow:hidden; }
+ .cta-band .inner{ position:relative; z-index:2; text-align:center; max-width:680px; margin-inline:auto; }
+ .cta-band .display{ color:var(--cream); }
+
+ /* quiz invitation band */
+ .quiz-invite{ position:relative; overflow:hidden; border-radius:var(--r-xl); padding:clamp(40px,6vw,76px) clamp(26px,5vw,60px); text-align:center; background:linear-gradient(140deg, var(--linen) 0%, var(--linen-deep) 100%); border:1px solid rgba(188,129,58,.28); box-shadow:var(--shadow-md); }
+ .quiz-invite .qi-glow{ position:absolute; right:-8%; top:-40%; width:48%; height:170%; background:radial-gradient(circle, rgba(188,129,58,.30), transparent 64%); filter:blur(16px); pointer-events:none; }
+ .quiz-invite .qi-inner{ position:relative; z-index:2; max-width:640px; margin-inline:auto; }
+ .quiz-invite h2{ margin:14px 0 16px; }
+ .quiz-invite p{ color:var(--ink-soft); font-size:clamp(16px,1.4vw,18px); margin:0 auto; max-width:48ch; }
+ .qi-badges{ display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:28px 0 30px; }
+ .qi-badge{ display:inline-flex; align-items:center; gap:9px; padding:9px 16px; border-radius:var(--r-pill); background:var(--paper); border:1px solid var(--linen-deep); font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--ink-soft); white-space:nowrap; }
+ .qi-badge .d{ width:6px; height:6px; border-radius:50%; background:var(--honey); }
+ .quiz-invite .qi-trust{ margin-top:22px; font-size:13.5px; color:var(--ink-soft); letter-spacing:.02em; }
+ .quiz-invite .qi-trust .stars{ color:var(--honey); letter-spacing:.16em; }
+
+ .img-failed{ opacity:0; }
+
+ @media (max-width:880px){
+ .manifesto{ grid-template-columns:1fr; gap:26px; }
+ .feat-grid{ grid-template-columns:1fr 1fr; }
+ .rood-band .inner{ grid-template-columns:1fr; gap:30px; }
+ .pillars{ grid-template-columns:1fr; gap:36px; }
+ }
+ @media (max-width:560px){
+ .feat-grid{ grid-template-columns:1fr; }
+ .hero{ min-height:90vh; } .scroll-cue{ display:none; }
+ }
+</style>
+</head>
+<body data-page="home">
+ <header data-site-header data-on-dark></header>
+
+ <!-- HERO -->
+ <section class="hero" data-screen-label="Home hero">
+ <div class="bg">
+ <img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/banner1.png" alt="The Healing Lounge interieur" onerror="this.classList.add('img-failed')">
+ </div>
+ <div class="container inner">
+ <span class="eyebrow on-dark" data-nl="Wellness &amp; Zonnestudio · Leusden" data-en="Wellness &amp; Tanning Studio · Leusden">Wellness &amp; Zonnestudio · Leusden</span>
+ <h1 class="display" data-nl-html="Rust voor lichaam<br>en geest." data-en-html="Rest for body<br>and mind.">Rust voor lichaam<br>en geest.</h1>
+ <p data-nl="Een luxe zonnestudio en wellnesssalon in het hart van Leusden, gezichtsbehandelingen, honingmassages, cupping en therapieën, met de zachtheid van een boeddhistisch ritueel." data-en="A luxury tanning studio and wellness salon in the heart of Leusden, facials, honey massages, cupping and therapies, with the softness of a Buddhist ritual.">Een luxe zonnestudio en wellnesssalon in het hart van Leusden, gezichtsbehandelingen, honingmassages, cupping en therapieën, met de zachtheid van een boeddhistisch ritueel.</p>
+ <div class="cta-row">
+ <a class="btn btn-gold btn-lg" href="boeken.html" data-nl="Boek een behandeling" data-en="Book a treatment">Boek een behandeling</a>
+ <a class="btn btn-ghost on-dark btn-lg" href="behandelingen.html" data-nl="Ontdek behandelingen" data-en="Explore treatments">Ontdek behandelingen</a>
+ </div>
+ </div>
+ <div class="scroll-cue"><span data-nl="Scroll" data-en="Scroll">Scroll</span><span class="line"></span></div>
+ </section>
+
+ <!-- MANIFESTO -->
+ <section class="section">
+ <div class="container manifesto reveal">
+ <div>
+ <span class="eyebrow" data-nl="Stille luxe" data-en="Quiet luxury">Stille luxe</span>
+ <hr class="rule-gold" style="margin:20px 0 26px">
+ <p class="big" data-nl-html="Bij The Healing Lounge nemen we de tijd. Warmte van honing en hout, gedimd licht en een <em>oprechte aandacht</em> voor wie binnenkomt, zodat je weer thuiskomt bij jezelf." data-en-html="At The Healing Lounge we take our time. The warmth of honey and wood, dimmed light and a <em>sincere attention</em> for whoever walks in, so you return home to yourself.">Bij The Healing Lounge nemen we de tijd.</p>
+ </div>
+ <div>
+ <p class="lead" data-nl="Chantal en Maaike ontvangen je in een serene ruimte die is ingericht om los te laten. Geen haast, geen ruis, alleen jij en een moment dat volledig om jouw welzijn draait. Van een verkwikkende Holistic Royal Face tot een diepe honing-bindweefselmassage." data-en="Chantal and Maaike welcome you into a serene space designed to let go. No rush, no noise, just you and a moment entirely devoted to your wellbeing. From a refreshing Holistic Royal Face to a deep honey connective-tissue massage.">Chantal en Maaike ontvangen je in een serene ruimte die is ingericht om los te laten.</p>
+ <p class="sign">, Chantal &amp; Maaike</p>
+ </div>
+ </div>
+ </section>
+
+ <!-- FEATURED TREATMENTS -->
+ <section class="section" style="padding-top:0">
+ <div class="container">
+ <div class="feat-head reveal">
+ <div>
+ <span class="eyebrow" data-nl="Onze behandelingen" data-en="Our treatments">Onze behandelingen</span>
+ <h2 style="margin-top:14px" data-nl="Momenten om naar uit te kijken" data-en="Moments to look forward to">Momenten om naar uit te kijken</h2>
+ </div>
+ <a class="more-link" href="behandelingen.html" data-nl="Alle behandelingen →" data-en="All treatments →">Alle behandelingen →</a>
+ </div>
+ <div class="grid feat-grid">
+ <!-- card 1 -->
+ <a class="treat-card reveal" href="holistic-royal-face.html">
+ <div class="photo" style="aspect-ratio:4/3.1"><img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/Royal-Facial.png" alt="Holistic Royal Face" onerror="this.classList.add('img-failed')"></div>
+ <div class="body">
+ <span class="tag"><span class="dot"></span><span data-nl="Gezicht" data-en="Facial">Gezicht</span></span>
+ <h3 data-nl="Holistic Royal Face" data-en="Holistic Royal Face">Holistic Royal Face</h3>
+ <p class="muted" style="font-size:14.5px;margin:0" data-nl="Verfijnde gezichtsbehandeling die huid en zenuwstelsel tot rust brengt." data-en="A refined facial that calms both skin and nervous system.">Verfijnde gezichtsbehandeling die huid en zenuwstelsel tot rust brengt.</p>
+ <div class="meta-row"><span class="price">€ 95</span><span class="dur">75 min</span></div>
+ </div>
+ </a>
+ <!-- card 2 -->
+ <a class="treat-card reveal" href="honing-bindweefselmassage-rug.html">
+ <div class="photo" style="aspect-ratio:4/3.1"><img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/Honing-rug-massage-banner.png" alt="Honing Bindweefselmassage Rug" onerror="this.classList.add('img-failed')"></div>
+ <div class="body">
+ <span class="tag"><span class="dot"></span><span data-nl="Lichaam" data-en="Body">Lichaam</span></span>
+ <h3 data-nl="Honing Bindweefsel · Rug" data-en="Honey Connective · Back">Honing Bindweefsel · Rug</h3>
+ <p class="muted" style="font-size:14.5px;margin:0" data-nl="Diepe, ontgiftende massage met honing die het bindweefsel losmaakt." data-en="A deep, detoxifying honey massage that releases connective tissue.">Diepe, ontgiftende massage met honing die het bindweefsel losmaakt.</p>
+ <div class="meta-row"><span class="price">€ 85</span><span class="dur">60 min</span></div>
+ </div>
+ </a>
+ <!-- card 3 -->
+ <a class="treat-card reveal" href="transformational-cupping.html">
+ <div class="photo" style="aspect-ratio:4/3.1"><img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/Transformational-cupping-banner.png" alt="Transformational Cupping" onerror="this.classList.add('img-failed')"></div>
+ <div class="body">
+ <span class="tag"><span class="dot"></span><span data-nl="Lichaam" data-en="Body">Lichaam</span></span>
+ <h3 data-nl="Transformational Cupping" data-en="Transformational Cupping">Transformational Cupping</h3>
+ <p class="muted" style="font-size:14.5px;margin:0" data-nl="Cupping die spanning loslaat en de doorbloeding diep stimuleert." data-en="Cupping that releases tension and deeply stimulates circulation.">Cupping die spanning loslaat en de doorbloeding diep stimuleert.</p>
+ <div class="meta-row"><span class="price">€ 89</span><span class="dur">60 min</span></div>
+ </div>
+ </a>
+ <!-- card 4 -->
+ <a class="treat-card reveal" href="kundalini-shakti-flow.html">
+ <div class="photo" style="aspect-ratio:4/3.1"><img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/Kundalini-banner.png" alt="Kundalini Shakti Flow" onerror="this.classList.add('img-failed')"></div>
+ <div class="body">
+ <span class="tag"><span class="dot"></span><span data-nl="Massage" data-en="Massage">Massage</span></span>
+ <h3 data-nl="Kundalini Shakti Flow" data-en="Kundalini Shakti Flow">Kundalini Shakti Flow</h3>
+ <p class="muted" style="font-size:14.5px;margin:0" data-nl="Holistische flow-massage die energie laat stromen van top tot teen." data-en="A holistic flow massage that lets energy move from head to toe.">Holistische flow-massage die energie laat stromen van top tot teen.</p>
+ <div class="meta-row"><span class="price">€ 90</span><span class="dur">75 min</span></div>
+ </div>
+ </a>
+ </div>
+ </div>
+ </section>
+
+ <!-- QUIZ INVITATION -->
+ <section class="section" style="padding-top:0" data-screen-label="Quiz uitnodiging">
+ <div class="container">
+ <div class="quiz-invite reveal">
+ <div class="qi-glow"></div>
+ <div class="qi-inner">
+ <span class="eyebrow" data-nl="Niet zeker wat je nodig hebt?" data-en="Not sure what you need?">Niet zeker wat je nodig hebt?</span>
+ <h2 data-nl="Welke behandeling past bij jou?" data-en="Which treatment suits you?">Welke behandeling past bij jou?</h2>
+ <p data-nl="Doe de korte quiz en ontdek in zes vragen welke behandeling het beste aansluit op wat jouw lichaam nu nodig heeft, daarna boek je direct." data-en="Take the short quiz and discover in six questions which treatment fits what your body needs right now, then book straight away.">Doe de korte quiz en ontdek in zes vragen welke behandeling het beste aansluit op wat jouw lichaam nu nodig heeft, daarna boek je direct.</p>
+ <div class="qi-badges">
+ <span class="qi-badge"><span class="d"></span><span data-nl="6 vragen" data-en="6 questions">6 vragen</span></span>
+ <span class="qi-badge"><span class="d"></span><span data-nl="± 1 minuut" data-en="± 1 minute">± 1 minuut</span></span>
+ <span class="qi-badge"><span class="d"></span><span data-nl="Persoonlijk advies" data-en="Personal advice">Persoonlijk advies</span></span>
+ </div>
+ <a class="btn btn-gold btn-lg" href="quiz.html" data-nl="Doe de quiz" data-en="Take the quiz">Doe de quiz</a>
+ <p class="qi-trust"><span class="stars">★★★★★</span> &nbsp;<span data-nl="Gemaakt op basis van onze échte behandelingen · 4,9 op Google" data-en="Built on our real treatments · 4.9 on Google">Gemaakt op basis van onze échte behandelingen · 4,9 op Google</span></p>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- ROOD LICHT BAND -->
+ <section class="section on-dark-bg rood-band" id="rood-licht" data-screen-label="Rood licht band">
+ <div class="glow"></div>
+ <div class="container inner reveal">
+ <div>
+ <span class="badge" data-nl="De hele dag boekbaar" data-en="Bookable all day">De hele dag boekbaar</span>
+ <h2 style="margin:22px 0 16px;max-width:16ch" data-nl="Rood Licht Therapie, wanneer het jou uitkomt" data-en="Red Light Therapy, whenever it suits you">Rood Licht Therapie, wanneer het jou uitkomt</h2>
+ <p class="muted" style="max-width:48ch" data-nl="In onze aparte Rode Licht Ruimte boek je zelfstandig, geen afspraak met een medewerker nodig. Ook wanneer de behandelruimte vol zit, vind jij hier je moment van herstel." data-en="In our separate Red Light Room you book independently, no staff appointment needed. Even when the treatment room is full, you'll find your moment of recovery here.">In onze aparte Rode Licht Ruimte boek je zelfstandig, geen afspraak met een medewerker nodig.</p>
+ <a class="btn btn-gold" style="margin-top:28px" href="boeken.html?treatment=rood-licht" data-nl="Plan rood licht" data-en="Book red light">Plan rood licht</a>
+ </div>
+ <div class="photo" style="border-radius:var(--r-lg);aspect-ratio:4/3.4;min-height:240px">
+ <img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/08/Untitled-3.jpg" alt="Rode Licht Ruimte" onerror="this.classList.add('img-failed')">
+ <div class="scrim" style="background:linear-gradient(180deg,transparent,rgba(176,84,63,.35))"></div>
+ </div>
+ </div>
+ </section>
+
+ <!-- RITUEEL / SHADER -->
+ <section class="ritueel" data-screen-label="Ritueel shader">
+ <canvas id="ritueel-canvas" aria-hidden="true"></canvas>
+ <div class="inner">
+ <p class="quote" data-nl-html="Tot rust komen<br>is een ritueel." data-en-html="Coming to rest<br>is a ritual.">Tot rust komen<br>is een ritueel.</p>
+ <p class="sub" data-nl="Beweeg je muis door de honing." data-en="Move your mouse through the honey.">Beweeg je muis door de honing.</p>
+ </div>
+ <span class="hint" data-nl="Levende achtergrond · reageert op je beweging" data-en="Living background · reacts to your movement">Levende achtergrond · reageert op je beweging</span>
+ </section>
+
+ <!-- PILLARS -->
+ <section class="section">
+ <div class="container">
+ <div class="center reveal" style="max-width:640px;margin-inline:auto 64px">
+ <span class="eyebrow" data-nl="De ervaring" data-en="The experience">De ervaring</span>
+ <h2 style="margin-top:14px" data-nl="Zorgvuldig, warm, oprecht" data-en="Careful, warm, sincere">Zorgvuldig, warm, oprecht</h2>
+ </div>
+ <div class="grid pillars">
+ <div class="pillar reveal">
+ <div class="num">01</div>
+ <hr class="rule-gold">
+ <h3 data-nl="Boeddhistische zachtheid" data-en="Buddhist softness">Boeddhistische zachtheid</h3>
+ <p class="muted" data-nl="Een serene sfeer met aandacht voor stilte, adem en het loslaten van spanning." data-en="A serene atmosphere with attention to stillness, breath and releasing tension.">Een serene sfeer met aandacht voor stilte, adem en het loslaten van spanning.</p>
+ </div>
+ <div class="pillar reveal">
+ <div class="num">02</div>
+ <hr class="rule-gold">
+ <h3 data-nl="Warmte van honing &amp; hout" data-en="Warmth of honey &amp; wood">Warmte van honing &amp; hout</h3>
+ <p class="muted" data-nl="Natuurlijke materialen en behandelingen met honing die huid en geest voeden." data-en="Natural materials and honey treatments that nourish skin and mind.">Natuurlijke materialen en behandelingen met honing die huid en geest voeden.</p>
+ </div>
+ <div class="pillar reveal">
+ <div class="num">03</div>
+ <hr class="rule-gold">
+ <h3 data-nl="Betaling in de salon" data-en="Payment at the salon">Betaling in de salon</h3>
+ <p class="muted" data-nl="We vragen nooit vooruitbetaling. Je rekent rustig af in de salon, ná je behandeling." data-en="We never ask for prepayment. You settle calmly at the salon, after your treatment.">We vragen nooit vooruitbetaling. Je rekent rustig af in de salon, ná je behandeling.</p>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- REVIEW -->
+ <section class="section" style="background:var(--linen)">
+ <div class="container">
+ <div class="review reveal">
+ <div class="stars">★★★★★</div>
+ <p class="q" data-nl="&ldquo;Vanaf het moment dat ik binnenkwam viel de drukte van me af. Een uur lang volledige aandacht, ik kwam thuis bij mezelf.&rdquo;" data-en="&ldquo;From the moment I walked in, the busyness fell away. A full hour of complete attention, I came home to myself.&rdquo;">&ldquo;Vanaf het moment dat ik binnenkwam viel de drukte van me af. Een uur lang volledige aandacht, ik kwam thuis bij mezelf.&rdquo;</p>
+ <p class="who">Google · 4,9 ★ · <span data-nl="Sandra, Leusden" data-en="Sandra, Leusden">Sandra, Leusden</span></p>
+ </div>
+ </div>
+ </section>
+
+ <!-- CTA BAND -->
+ <section class="section on-dark-bg cta-band" data-screen-label="CTA band">
+ <div class="bg" style="position:absolute;inset:0;opacity:.22"><div class="photo" style="height:100%"><img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/Foto-hoofdpagina.png" alt="" onerror="this.classList.add('img-failed')"></div></div>
+ <div class="container inner reveal">
+ <span class="eyebrow on-dark" data-nl="Jouw moment" data-en="Your moment">Jouw moment</span>
+ <h2 class="display" style="font-size:clamp(34px,5vw,64px);margin:18px 0 24px" data-nl-html="Klaar voor een moment<br>helemaal voor jou?" data-en-html="Ready for a moment<br>entirely for you?">Klaar voor een moment<br>helemaal voor jou?</h2>
+ <a class="btn btn-gold btn-lg" href="boeken.html" data-nl="Boek nu online" data-en="Book online now">Boek nu online</a>
+ </div>
+ </section>
+
+ <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="14" fill="#241910"/><circle cx="50" cy="50" r="20" fill="none" stroke="#5FA29A" stroke-width="6" stroke-linecap="round" stroke-dasharray="92 30"/></svg></template>
+  <footer data-site-footer></footer>
+
+ <script src="wallpapers.js"></script>
+ <script src="assets/brand/logos.js"></script>
+  <script src="assets/site.js"></script>
+ <script>
+ // Mount the honingstroom shader as a calm, living background in the ritual section.
+ (function(){
+ var cv = document.getElementById('ritueel-canvas');
+ function go(){ if(window.HLMountShader && cv) window.HLMountShader(cv, 'honey', {speed:0.85, maxDpr:1.5}); }
+ if(document.readyState!=='loading') go(); else window.addEventListener('DOMContentLoaded', go);
+ })();
+ </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boeken · The Healing Lounge</title>
+<link rel="stylesheet" href="assets/healing.css">
+<link rel="stylesheet" href="assets/booking.css">
+</head>
+<body data-page="book">
+ <!-- focused booking header -->
+ <div class="bk-topbar">
+ <a class="brand" href="index.html"><img class="mark" src="assets/brand/icon.png" alt="" style="border:0;padding:0;width:30px;height:30px;object-fit:contain"><span>The Healing Lounge</span></a>
+ <div class="bk-right">
+ <div class="lang" role="group" aria-label="Taal / Language">
+ <button data-lang="nl"><span>NL</span></button>
+ <button data-lang="en"><span>EN</span></button>
+ </div>
+ <a class="bk-close" href="index.html" aria-label="Sluiten" data-nl-ph="" title="Sluiten">×</a>
+ </div>
+ </div>
+
+ <div class="stepper" id="stepper"></div>
+ <div class="summary" id="summary"></div>
+ <div class="flow" id="flow"></div>
+
+ <script src="assets/treatments.js"></script>
+ <script src="wallpapers.js"></script>
+ <script src="assets/site.js"></script>
+ <script src="assets/booking.js"></script>
+ <script>
+ document.querySelectorAll('.bk-topbar .lang button').forEach(function(b){
+ b.addEventListener('click', function(){ window.HL_setLang(b.dataset.lang); });
+ });
+ function startBooking(){ if(window.HL_BOOKING_INIT) window.HL_BOOKING_INIT(); }
+ if(document.readyState!=='loading') startBooking(); else window.addEventListener('DOMContentLoaded', startBooking);
+ </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+/* ============================================================
+   THE HEALING LOUNGE — beheer (klanten & boekingen)
+   Internal dashboard. Builds on healing.css tokens.
+   ============================================================ */
+body[data-page="beheer"]{ background:var(--linen); color:var(--ink); }
+
+.bh-topbar{ position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding:16px clamp(18px,5vw,48px); background:rgba(251,246,236,.92); backdrop-filter:blur(12px); border-bottom:1px solid var(--linen-deep); }
+.bh-topbar .brand{ font-family:var(--serif); font-size:20px; display:flex; align-items:center; gap:11px; }
+.bh-topbar .brand .mark{ width:30px; height:30px; border-radius:50%; border:1.5px solid var(--honey); color:var(--honey); display:grid; place-items:center; font-size:13px; }
+.bh-topbar .brand small{ display:block; font-family:var(--sans); font-size:9.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-soft); font-weight:700; margin-top:2px; }
+.bh-close{ color:var(--ink-soft); font-size:24px; padding:4px 10px; }
+.bh-close:hover{ color:var(--ink); }
+
+.bh-wrap{ max-width:1180px; margin-inline:auto; padding:clamp(26px,4vw,48px) clamp(18px,5vw,48px) 80px; }
+.bh-head h1{ font-size:clamp(30px,4vw,46px); }
+.bh-head .sub{ color:var(--ink-soft); margin-top:8px; font-size:15px; }
+.bh-head .sub b{ color:var(--ink); font-weight:600; }
+
+/* stat cards */
+.bh-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:30px 0; }
+.bh-stat{ background:var(--paper); border:1px solid var(--linen-deep); border-radius:var(--r-md); padding:20px 22px; }
+.bh-stat .n{ font-family:var(--serif); font-size:40px; line-height:1; color:var(--ink); }
+.bh-stat .l{ font-size:13px; letter-spacing:.04em; color:var(--ink-soft); margin-top:8px; }
+.bh-stat.warn{ border-color:rgba(176,84,63,.4); background:linear-gradient(160deg,#fbf2ee,var(--paper)); }
+.bh-stat.warn .n{ color:var(--rood); }
+
+/* attention panel */
+.bh-issues{ background:var(--paper); border:1px solid var(--linen-deep); border-left:3px solid var(--rood); border-radius:var(--r-md); padding:22px 24px; margin-bottom:30px; }
+.bh-issues h3{ font-family:var(--sans); font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--rood); margin:0 0 16px; display:flex; align-items:center; gap:10px; }
+.bh-issue-group + .bh-issue-group{ margin-top:18px; padding-top:18px; border-top:1px solid var(--linen-deep); }
+.bh-issue-group .gt{ font-weight:600; font-size:14.5px; margin-bottom:9px; color:var(--ink); }
+.bh-issue-group ul{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:7px; }
+.bh-issue-group li{ font-size:14px; color:var(--ink-soft); display:flex; gap:10px; align-items:baseline; }
+.bh-issue-group li .who{ color:var(--ink); font-weight:600; }
+.bh-issue-group li .fix{ color:var(--green-soft); }
+.bh-issue-group.ok .gt{ color:var(--green-soft); }
+.bh-chip-count{ background:var(--rood); color:var(--paper); border-radius:var(--r-pill); font-size:12px; font-weight:700; padding:2px 9px; margin-left:auto; }
+
+/* tabs */
+.bh-tabs{ display:flex; gap:6px; border-bottom:1px solid var(--linen-deep); margin-bottom:22px; flex-wrap:wrap; }
+.bh-tab{ background:none; border:0; padding:12px 18px; font-weight:600; font-size:14.5px; color:var(--ink-soft); border-bottom:2px solid transparent; margin-bottom:-1px; }
+.bh-tab.on{ color:var(--ink); border-bottom-color:var(--honey); }
+.bh-tab:hover{ color:var(--ink); }
+
+/* toolbar (search) */
+.bh-toolbar{ display:flex; gap:12px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+.bh-search{ flex:1; min-width:200px; display:flex; align-items:center; gap:10px; background:var(--paper); border:1px solid var(--linen-deep); border-radius:var(--r-pill); padding:10px 18px; }
+.bh-search input{ border:0; background:none; outline:none; font-family:var(--sans); font-size:15px; color:var(--ink); width:100%; }
+.bh-search svg{ color:var(--ink-faint); flex:none; }
+.bh-filter-toggle{ display:inline-flex; align-items:center; gap:9px; background:var(--paper); border:1px solid var(--linen-deep); border-radius:var(--r-pill); padding:10px 16px; font-size:13.5px; font-weight:600; color:var(--ink-soft); cursor:pointer; }
+.bh-filter-toggle.on{ border-color:var(--rood); color:var(--rood); }
+.bh-count-line{ font-size:13px; color:var(--ink-soft); margin-bottom:12px; }
+
+/* table */
+.bh-table-wrap{ background:var(--paper); border:1px solid var(--linen-deep); border-radius:var(--r-md); overflow:hidden; }
+table.bh-table{ width:100%; border-collapse:collapse; font-size:14.5px; }
+.bh-table th{ text-align:left; font-family:var(--sans); font-weight:700; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); padding:14px 16px; background:var(--linen); border-bottom:1px solid var(--linen-deep); white-space:nowrap; position:sticky; top:62px; }
+.bh-table td{ padding:13px 16px; border-bottom:1px solid var(--linen-deep); vertical-align:middle; }
+.bh-table tr:last-child td{ border-bottom:0; }
+.bh-table tbody tr:hover{ background:var(--linen); }
+.bh-table .nm{ font-weight:600; color:var(--ink); }
+.bh-table .mono{ font-family:ui-monospace,Menlo,monospace; font-size:13px; }
+.bh-bad{ color:var(--rood); }
+.bh-flag{ display:inline-flex; align-items:center; gap:5px; background:rgba(176,84,63,.12); color:var(--rood); border-radius:var(--r-pill); font-size:11px; font-weight:700; padding:2px 9px; white-space:nowrap; }
+.bh-muted{ color:var(--ink-faint); }
+.bh-pill{ display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:600; padding:3px 10px; border-radius:var(--r-pill); }
+.bh-pill.ok{ background:rgba(58,74,51,.12); color:var(--green-soft); }
+.bh-pill.cancel{ background:rgba(122,106,87,.14); color:var(--ink-soft); }
+.bh-pill.src{ background:rgba(188,129,58,.14); color:var(--honey); }
+.bh-tag-src{ font-size:10.5px; letter-spacing:.06em; color:var(--ink-faint); text-transform:uppercase; }
+
+/* import tab */
+.bh-import{ display:grid; grid-template-columns:1fr; gap:22px; max-width:760px; }
+.bh-card{ background:var(--paper); border:1px solid var(--linen-deep); border-radius:var(--r-md); padding:24px 26px; }
+.bh-card h3{ font-size:20px; margin:0 0 10px; }
+.bh-card p{ color:var(--ink-soft); font-size:15px; margin:0 0 14px; }
+.bh-rule{ display:flex; gap:14px; align-items:flex-start; background:var(--linen); border-radius:var(--r-sm); padding:14px 16px; font-size:14px; color:var(--ink); }
+.bh-rule .ic{ color:var(--honey); flex:none; }
+.bh-drop{ border:1.5px dashed var(--ink-faint); border-radius:var(--r-md); padding:34px 20px; text-align:center; color:var(--ink-soft); transition:all .3s; cursor:pointer; }
+.bh-drop.hot{ border-color:var(--honey); background:rgba(188,129,58,.06); color:var(--ink); }
+.bh-drop b{ color:var(--ink); }
+.bh-radios{ display:flex; gap:10px; margin:16px 0; flex-wrap:wrap; }
+.bh-radio{ flex:1; min-width:200px; border:1px solid var(--linen-deep); border-radius:var(--r-sm); padding:14px 16px; cursor:pointer; display:flex; gap:12px; align-items:flex-start; }
+.bh-radio.on{ border-color:var(--honey); background:rgba(188,129,58,.06); }
+.bh-radio input{ margin-top:3px; accent-color:var(--honey); }
+.bh-radio .rt{ font-weight:600; font-size:14.5px; color:var(--ink); }
+.bh-radio .rd{ font-size:13px; color:var(--ink-soft); margin-top:3px; }
+.bh-preview{ font-size:14px; color:var(--ink); background:var(--linen); border-radius:var(--r-sm); padding:14px 16px; margin-top:14px; display:none; }
+.bh-preview.show{ display:block; }
+.bh-actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; }
+.bh-note{ font-size:12.5px; color:var(--ink-faint); margin-top:14px; }
+
+@media (max-width:720px){
+  .bh-stats{ grid-template-columns:1fr; }
+  .bh-table .hide-sm{ display:none; }
+  .bh-table th{ position:static; }
+}

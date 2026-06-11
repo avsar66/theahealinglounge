@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welke behandeling past bij jou? · The Healing Lounge</title>
+<meta name="description" content="Doe de korte quiz en ontdek welke behandeling van The Healing Lounge perfect bij je past, daarna boek je direct.">
+<meta property="og:title" content="Welke behandeling past bij jou? · The Healing Lounge">
+<meta property="og:description" content="Zes korte vragen en je weet welke behandeling het beste bij je past. Direct boekbaar.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="assets/healing.css">
+<link rel="stylesheet" href="assets/quiz.css">
+</head>
+<body data-page="quiz">
+ <!-- living honey backdrop -->
+ <div class="qz-bg" aria-hidden="true"><canvas id="qz-canvas"></canvas></div>
+
+ <!-- focused top bar -->
+ <div class="qz-topbar">
+ <a class="brand" href="index.html"><img class="mark" src="assets/brand/icon.png" alt="" style="border:0;padding:0;object-fit:contain"><span>The Healing Lounge</span></a>
+ <div class="qz-right">
+ <div class="lang" role="group" aria-label="Taal / Language">
+ <button data-lang="nl"><span>NL</span></button>
+ <button data-lang="en"><span>EN</span></button>
+ </div>
+ <a class="qz-close" href="index.html" aria-label="Sluiten" title="Sluiten">×</a>
+ </div>
+ </div>
+
+ <main class="qz-stage" data-screen-label="Quiz">
+ <div class="qz-wrap">
+ <div id="qz-host"></div>
+ </div>
+ </main>
+
+  <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="14" fill="#241910"/><circle cx="50" cy="50" r="20" fill="none" stroke="#D7B877" stroke-width="6" stroke-linecap="round" stroke-dasharray="78 40"/></svg></template>
+
+ <script src="assets/treatments.js"></script>
+ <script src="assets/quiz-data.js"></script>
+ <script src="wallpapers.js"></script>
+ <script src="assets/site.js"></script>
+ <script src="assets/quiz.js"></script>
+ <script>
+ // language buttons in the focused topbar
+ document.querySelectorAll('.qz-topbar .lang button').forEach(function(b){
+ b.addEventListener('click', function(){ window.HL_setLang(b.dataset.lang); });
+ });
+ // mount the honey shader as a calm living backdrop
+ (function(){
+ var cv = document.getElementById('qz-canvas');
+ function go(){ if(window.HLMountShader && cv) window.HLMountShader(cv, 'honey', {speed:0.6, maxDpr:1.4}); }
+ if(document.readyState!=='loading') go(); else window.addEventListener('DOMContentLoaded', go);
+ })();
+ // boot quiz
+ function startQuiz(){ if(window.HL_QUIZ_INIT) window.HL_QUIZ_INIT(); }
+ if(document.readyState!=='loading') startQuiz(); else window.addEventListener('DOMContentLoaded', startQuiz);
+ </script>
+</body>
+</html>

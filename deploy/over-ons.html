@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Over ons · The Healing Lounge · Leusden</title>
+<meta name="description" content="Maak kennis met Chantal en Maaike van The Healing Lounge in Leusden. Een serene wellnesssalon en zonnestudio met de zachtheid van een boeddhistisch ritueel.">
+<link rel="canonical" href="https://www.thehealinglounge.nl/over-ons.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Over ons · The Healing Lounge · Leusden">
+<meta property="og:description" content="Rust voor lichaam en geest, met oprechte aandacht. Maak kennis met The Healing Lounge in Leusden.">
+<meta property="og:url" content="https://www.thehealinglounge.nl/over-ons.html">
+<link rel="stylesheet" href="assets/healing.css">
+<style>
+ .page-hero{ background:var(--espresso); color:var(--cream); padding:160px 0 70px; position:relative; overflow:hidden; }
+ .page-hero .display{ color:var(--cream); margin:16px 0 18px; font-size:clamp(40px,5.5vw,72px); }
+ .page-hero p{ color:rgba(243,236,222,.82); max-width:54ch; }
+ .page-hero .glow{ position:absolute; left:-8%; bottom:-60%; width:50%; height:180%; background:radial-gradient(circle, rgba(58,74,51,.4), transparent 62%); filter:blur(10px); }
+
+ .story{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(36px,6vw,80px); align-items:center; }
+ .story .photo{ border-radius:var(--r-lg); aspect-ratio:4/4.6; min-height:320px; }
+ .story h2{ margin-bottom:18px; }
+
+ .team-grid{ grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,48px); margin-top:48px; }
+ .member{ background:var(--paper); border:1px solid var(--linen-deep); border-radius:var(--r-lg); overflow:hidden; }
+ .member .ph.member .photo{ aspect-ratio:4/3.4; }
+ .member .body{ padding:26px 28px 30px; }
+ .member h3{ font-size:26px; }
+ .member .role{ font-size:13px; letter-spacing:.1em; text-transform:uppercase; color:var(--honey); font-weight:600; margin:6px 0 14px; }
+
+ .gallery{ columns:3; column-gap:14px; }
+ .gallery .photo{ break-inside:avoid; margin-bottom:14px; border-radius:var(--r-md); }
+ .gallery .photo:nth-child(3n+1){ aspect-ratio:4/5; }
+ .gallery .photo:nth-child(3n+2){ aspect-ratio:4/3; }
+ .gallery .photo:nth-child(3n+3){ aspect-ratio:1/1; }
+
+ .quote-band{ text-align:center; }
+ .quote-band .q{ font-family:var(--serif); font-size:clamp(26px,3.4vw,44px); line-height:1.25; max-width:18ch; margin:0 auto; color:var(--cream); }
+
+ @media (max-width:900px){
+ .story{ grid-template-columns:1fr; } .story .photo{ order:-1; aspect-ratio:4/3; }
+ .team-grid{ grid-template-columns:1fr; } .gallery{ columns:2; }
+ }
+ @media (max-width:560px){ .gallery{ columns:1; } }
+</style>
+</head>
+<body data-page="about">
+ <header data-site-header data-on-dark></header>
+
+ <section class="page-hero" data-screen-label="Over ons hero">
+ <div class="glow"></div>
+ <div class="container">
+ <span class="eyebrow on-dark" data-nl="Over ons" data-en="About us">Over ons</span>
+ <h1 class="display" data-nl="Rust als ambacht" data-en="Rest as a craft">Rust als ambacht</h1>
+ <p data-nl="The Healing Lounge ontstond uit een eenvoudig verlangen: een plek creëren waar je écht tot rust komt. Geen haast, geen ruis, alleen oprechte aandacht." data-en="The Healing Lounge grew from a simple wish: to create a place where you truly come to rest. No rush, no noise, only sincere attention.">The Healing Lounge ontstond uit een eenvoudig verlangen: een plek creëren waar je écht tot rust komt.</p>
+ </div>
+ </section>
+
+ <!-- STORY -->
+ <section class="section">
+ <div class="container story reveal">
+ <div>
+ <span class="eyebrow" data-nl="Onze filosofie" data-en="Our philosophy">Onze filosofie</span>
+ <hr class="rule-gold" style="margin:18px 0 24px">
+ <h2 data-nl="Een ritueel van loslaten" data-en="A ritual of letting go">Een ritueel van loslaten</h2>
+ <p class="lead" data-nl="Geïnspireerd door boeddhistische zachtheid en de warmte van honing en hout, ontvangen wij je in een serene ruimte met gedimd licht. Elke behandeling is een ritueel, een moment dat volledig om jouw welzijn draait." data-en="Inspired by Buddhist softness and the warmth of honey and wood, we welcome you into a serene space with dimmed light. Every treatment is a ritual, a moment entirely devoted to your wellbeing.">Geïnspireerd door boeddhistische zachtheid en de warmte van honing en hout, ontvangen wij je in een serene ruimte met gedimd licht.</p>
+ <p class="muted" data-nl="Of je nu komt voor een verkwikkende gezichtsbehandeling, een diepe honingmassage of een moment in onze Rode Licht Ruimte, wij nemen de tijd voor je." data-en="Whether you come for a refreshing facial, a deep honey massage or a moment in our Red Light Room, we take our time for you.">Of je nu komt voor een verkwikkende gezichtsbehandeling, een diepe honingmassage of een moment in onze Rode Licht Ruimte, wij nemen de tijd voor je.</p>
+ </div>
+ <div class="photo">
+ <img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/10/Foto-hoofdpagina.png" alt="The Healing Lounge interieur" onerror="this.classList.add('img-failed')">
+ </div>
+ </div>
+ </section>
+
+ <!-- TEAM -->
+ <section class="section" style="background:var(--linen);padding-top:clamp(56px,7vw,90px)">
+ <div class="container">
+ <div class="center reveal" style="max-width:600px;margin-inline:auto">
+ <span class="eyebrow" data-nl="Het team" data-en="The team">Het team</span>
+ <h2 style="margin-top:14px" data-nl="Chantal &amp; Maaike" data-en="Chantal &amp; Maaike">Chantal &amp; Maaike</h2>
+ </div>
+ <div class="grid team-grid">
+ <div class="member reveal">
+ <div class="ph" data-ph="portretfoto Chantal, nieuwe fotografie gewenst"></div>
+ <div class="body">
+ <h3>Chantal</h3>
+ <div class="role" data-nl="Eigenaar · alle behandelingen" data-en="Owner · all treatments">Eigenaar · alle behandelingen</div>
+ <p class="muted" style="margin:0" data-nl="Chantal richtte The Healing Lounge op vanuit haar passie voor holistische zorg. Zij verzorgt het volledige aanbod, van honing-bindweefselmassages tot cupping en therapieën." data-en="Chantal founded The Healing Lounge from her passion for holistic care. She performs the full range, from honey connective-tissue massages to cupping and therapies.">Chantal richtte The Healing Lounge op vanuit haar passie voor holistische zorg.</p>
+ </div>
+ </div>
+ <div class="member reveal">
+ <div class="ph" data-ph="portretfoto Maaike, nieuwe fotografie gewenst"></div>
+ <div class="body">
+ <h3>Maaike</h3>
+ <div class="role" data-nl="Behandelaar" data-en="Therapist">Behandelaar</div>
+ <p class="muted" style="margin:0" data-nl="Maaike verzorgt een deel van de behandelingen, onder meer gezichtsbehandelingen en wellnessmassages, met dezelfde warme, persoonlijke aandacht." data-en="Maaike performs a selection of treatments, including facials and wellness massages, with the same warm, personal attention.">Maaike verzorgt een deel van de behandelingen met dezelfde warme, persoonlijke aandacht.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </section>
+
+ <!-- QUOTE BAND -->
+ <section class="section on-dark-bg quote-band" data-screen-label="Filosofie quote">
+ <div class="container reveal">
+ <span class="eyebrow on-dark" data-nl="Onze belofte" data-en="Our promise">Onze belofte</span>
+ <p class="q" style="margin-top:24px" data-nl="&ldquo;Tijd, warmte en oprechte aandacht, voor iedereen die binnenkomt.&rdquo;" data-en="&ldquo;Time, warmth and sincere attention, for everyone who walks in.&rdquo;">&ldquo;Tijd, warmte en oprechte aandacht, voor iedereen die binnenkomt.&rdquo;</p>
+ </div>
+ </section>
+
+ <!-- GALLERY -->
+ <section class="section">
+ <div class="container">
+ <div class="center reveal" style="max-width:600px;margin-inline:auto 48px">
+ <span class="eyebrow" data-nl="De ruimte" data-en="The space">De ruimte</span>
+ <h2 style="margin-top:14px" data-nl="Waar je tot rust komt" data-en="Where you come to rest">Waar je tot rust komt</h2>
+ </div>
+ <div class="gallery reveal" id="gallery"></div>
+ </div>
+ </section>
+
+ <!-- CTA -->
+ <section class="section green-bg" style="text-align:center" data-screen-label="Over ons CTA">
+ <div class="container reveal">
+ <h2 class="display" style="font-size:clamp(32px,4.6vw,58px);color:var(--cream)" data-nl="Kom een keer langs" data-en="Come visit us">Kom een keer langs</h2>
+ <a class="btn btn-gold btn-lg" style="margin-top:24px" href="boeken.html" data-nl="Boek je moment" data-en="Book your moment">Boek je moment</a>
+ </div>
+ </section>
+
+ <footer data-site-footer></footer>
+
+ <script src="wallpapers.js"></script>
+ <script src="assets/site.js"></script>
+ <script>
+ (function(){
+ const M='https://www-static.thehealinglounge.nl/wp-content/uploads/2025/08/Untitled-';
+ const g=document.getElementById('gallery');
+ g.innerHTML=[1,2,3,4,5,6].map(n=>`<div class="photo"><img src="${M}${n}.jpg" alt="Interieur" loading="lazy" onerror="this.classList.add('img-failed')"></div>`).join('');
+ if(window.HL_setLang) window.HL_setLang(window.HL_getLang());
+ })();
+ </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Behandelingen · The Healing Lounge · Leusden</title>
+<meta name="description" content="Alle behandelingen van The Healing Lounge in Leusden: gezichtsbehandelingen, honingmassages, cupping, therapieën en rood licht. Kies wat bij je past en boek direct.">
+<link rel="canonical" href="https://www.thehealinglounge.nl/behandelingen.html">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Behandelingen · The Healing Lounge · Leusden">
+<meta property="og:description" content="Van verfijnde facials tot diepe honingmassages, cupping en therapieën in Leusden.">
+<meta property="og:url" content="https://www.thehealinglounge.nl/behandelingen.html">
+<link rel="stylesheet" href="assets/healing.css">
+<style>
+ .page-hero{ background:var(--espresso); color:var(--cream); padding:160px 0 70px; position:relative; overflow:hidden; }
+ .page-hero .display{ color:var(--cream); margin:16px 0 18px; font-size:clamp(40px,5.5vw,72px); }
+ .page-hero p{ color:rgba(243,236,222,.82); max-width:56ch; }
+ .page-hero .glow{ position:absolute; right:-8%; top:-40%; width:50%; height:180%; background:radial-gradient(circle, rgba(188,129,58,.32), transparent 60%); filter:blur(10px); }
+
+ .filterbar{ position:sticky; top:0; z-index:40; background:rgba(251,246,236,.92); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--linen-deep); }
+ .filterbar .inner{ display:flex; gap:10px; flex-wrap:wrap; padding:18px 0; }
+ .filterbar .chip{ cursor:pointer; }
+
+ .treat-grid{ grid-template-columns:repeat(3,1fr); padding-top:48px; }
+ .newphoto{ position:absolute; left:12px; bottom:12px; font-family:ui-monospace,monospace; font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--cream); background:rgba(24,15,8,.55); padding:4px 9px; border-radius:6px; border:1px dashed rgba(243,236,222,.4); }
+ .card-badges{ position:absolute; top:12px; left:12px; display:flex; gap:6px; }
+ .card-badge{ font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; background:rgba(251,246,236,.92); color:var(--ink); padding:5px 11px; border-radius:var(--r-pill); }
+ .card-badge.rood{ background:var(--rood); color:var(--paper); }
+ .filt{ transition:opacity .4s var(--ease), transform .4s var(--ease); }
+ .filt.hide{ display:none; }
+
+ .count{ font-size:13px; color:var(--ink-soft); letter-spacing:.04em; padding:6px 0 0; }
+
+ @media (max-width:900px){ .treat-grid{ grid-template-columns:1fr 1fr; } }
+ @media (max-width:560px){ .treat-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body data-page="treatments">
+ <header data-site-header data-on-dark></header>
+
+ <section class="page-hero" data-screen-label="Behandelingen hero">
+ <div class="glow"></div>
+ <div class="container">
+ <span class="eyebrow on-dark" data-nl="Behandelingen" data-en="Treatments">Behandelingen</span>
+ <h1 class="display" data-nl="Een moment voor jezelf" data-en="A moment for yourself">Een moment voor jezelf</h1>
+ <p data-nl="Van verfijnde gezichtsbehandelingen tot diepe honingmassages, cupping en therapieën. Kies wat bij jou past, wij nemen de tijd." data-en="From refined facials to deep honey massages, cupping and therapies. Choose what suits you, we take our time.">Van verfijnde gezichtsbehandelingen tot diepe honingmassages, cupping en therapieën. Kies wat bij jou past, wij nemen de tijd.</p>
+ </div>
+ </section>
+
+ <div class="filterbar">
+ <div class="container">
+ <div class="inner" id="filters"></div>
+ </div>
+ </div>
+
+ <section class="section" style="padding-top:0">
+ <div class="container">
+ <div class="count" id="count"></div>
+ <div class="grid treat-grid" id="grid"></div>
+ </div>
+ </section>
+
+ <footer data-site-footer></footer>
+
+ <script src="assets/treatments.js"></script>
+ <script src="wallpapers.js"></script>
+ <script src="assets/site.js"></script>
+ <script>
+ (function(){
+ const grid=document.getElementById('grid'), filters=document.getElementById('filters'), countEl=document.getElementById('count');
+ let active='all';
+
+ function cardHTML(t){
+ const cat=HL_CATS.find(c=>c.id===t.cat);
+ const badges=[];
+ if(t.allDay) badges.push('<span class="card-badge rood" data-nl="Hele dag boekbaar" data-en="All day bookable">Hele dag boekbaar</span>');
+ if(t.walkin) badges.push('<span class="card-badge" data-nl="Walk-in" data-en="Walk-in">Walk-in</span>');
+ const id = t.id==='rood-licht' ? ' id="rood-licht"' : '';
+ return `<a class="treat-card filt"${id} data-cat="${t.cat}" href="${window.HL_slug(t.id)}.html">
+ <div class="photo" style="aspect-ratio:4/3.1">
+ <img src="${t.photo}" alt="" loading="lazy" onerror="this.classList.add('img-failed')">
+ ${t.newPhoto?'<span class="newphoto" data-nl="nieuwe fotografie gewenst" data-en="new photography wanted">nieuwe fotografie gewenst</span>':''}
+ ${badges.length?'<div class="card-badges">'+badges.join('')+'</div>':''}
+ </div>
+ <div class="body">
+ <span class="tag${t.room==='rood'?' rood':''}"><span class="dot"></span><span data-nl="${cat.nl}" data-en="${cat.en}">${cat.nl}</span></span>
+ <h3 data-nl="${t.nl.name}" data-en="${t.en.name}">${t.nl.name}</h3>
+ <p class="muted" style="font-size:14.5px;margin:0" data-nl="${t.nl.desc}" data-en="${t.en.desc}">${t.nl.desc}</p>
+ <div class="meta-row"><span class="price">€ ${t.price}</span><span class="dur">${t.dur} min</span></div>
+ </div>
+ </a>`;
+ }
+
+ grid.innerHTML = HL_TREATMENTS.map(cardHTML).join('');
+ filters.innerHTML = HL_CATS.map(c=>`<button class="chip${c.id==='all'?' is-active':''}" data-filter="${c.id}" data-nl="${c.nl}" data-en="${c.en}">${c.nl}</button>`).join('');
+
+ function apply(){
+ let n=0;
+ grid.querySelectorAll('.filt').forEach(card=>{
+ const show = active==='all' || card.dataset.cat===active;
+ card.classList.toggle('hide', !show);
+ if(show) n++;
+ });
+ const lang=window.HL_getLang();
+ countEl.textContent = (lang==='nl'? n+' behandelingen' : n+' treatments');
+ }
+ filters.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+ active=ch.dataset.filter;
+ filters.querySelectorAll('.chip').forEach(c=>c.classList.toggle('is-active',c===ch));
+ apply();
+ }));
+
+ // localize freshly-rendered nodes + keep count in sync with language
+ window.HL_setLang(window.HL_getLang());
+ apply();
+ window.addEventListener('hl-lang', apply);
+ })();
+ </script>
+</body>
+</html>
