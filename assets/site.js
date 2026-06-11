@@ -46,7 +46,7 @@
  host.innerHTML = `
  <a class="brand" href="index.html" aria-label="The Healing Lounge home">
  <img class="mark" src="${(window.HL_LOGOS&&window.HL_LOGOS.icon)||'assets/brand/icon.png'}" alt="" style="border:0;padding:0;object-fit:contain">
- <span>The Healing Lounge<small>Leusden</small></span>
+ <span>The Healing Lounge<small>Well-being House</small></span>
  </a>
  <nav class="nav">${navHtml}</nav>
  <div class="header-right">
