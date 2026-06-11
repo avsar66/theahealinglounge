@@ -92,6 +92,28 @@
  .quiz-invite .qi-trust{ margin-top:22px; font-size:13.5px; color:var(--ink-soft); letter-spacing:.02em; }
  .quiz-invite .qi-trust .stars{ color:var(--honey); letter-spacing:.16em; }
 
+ /* rood licht — scroll-gedreven ervaring (de lampen gaan branden) */
+ .rood-scroll{ position:relative; background:#160B07; }
+ .rs-track{ position:relative; height:260vh; }
+ .rs-stage{ position:sticky; top:0; height:100vh; overflow:hidden; --lit:0; }
+ .rs-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; filter:brightness(calc(.42 + .60*var(--lit))) saturate(calc(.16 + .94*var(--lit))) contrast(calc(.96 + .10*var(--lit))); }
+ .rs-cool{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(12,16,26,.5), rgba(8,6,10,.45)); opacity:calc(1 - var(--lit)); pointer-events:none; z-index:1; }
+ .rs-glow{ position:absolute; inset:0; background:radial-gradient(78% 46% at 50% 23%, rgba(255,58,44,.6), rgba(200,40,30,.14) 46%, transparent 70%); mix-blend-mode:screen; opacity:var(--lit); pointer-events:none; z-index:2; }
+ .rs-roomwash{ position:absolute; inset:0; background:rgba(188,40,30,.2); mix-blend-mode:multiply; opacity:var(--lit); pointer-events:none; z-index:2; }
+ .rs-scrim{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(11,6,5,.74) 0%, rgba(11,6,5,.34) 40%, transparent 66%); pointer-events:none; z-index:3; }
+ .rs-fade-top{ position:absolute; inset:0 0 auto 0; height:140px; background:linear-gradient(var(--espresso-900,#241910), transparent); pointer-events:none; z-index:4; }
+ .rs-fade-bottom{ position:absolute; inset:auto 0 0 0; height:170px; background:linear-gradient(transparent, var(--linen)); pointer-events:none; z-index:4; opacity:0; }
+ .rs-copy{ position:absolute; left:0; bottom:0; z-index:5; padding:clamp(30px,6vw,82px); max-width:640px; }
+ .rs-copy .eyebrow{ color:var(--gold-soft); }
+ .rs-copy h2{ color:var(--cream); font-size:clamp(34px,5vw,62px); line-height:1.08; margin:14px 0 16px; text-shadow:0 2px 30px rgba(0,0,0,.6); }
+ .rs-copy p{ color:rgba(243,236,222,.92); font-size:clamp(16px,1.5vw,19px); line-height:1.6; max-width:44ch; margin:0 0 26px; text-shadow:0 1px 14px rgba(0,0,0,.5); }
+ @media (max-width:700px){
+  .rs-track{ height:200vh; }
+  .rs-scrim{ background:linear-gradient(0deg, rgba(11,6,5,.85) 0%, rgba(11,6,5,.45) 42%, transparent 74%); }
+  .rs-copy{ max-width:none; right:0; }
+ }
+ @media (prefers-reduced-motion: reduce){ .rs-stage{ --lit:1; } .rs-fade-bottom{ opacity:1; } }
+
  .img-failed{ opacity:0; }
 
  @media (max-width:880px){
@@ -217,28 +239,24 @@
  </div>
  </section>
 
- <!-- ROOD LICHT BAND -->
- <section class="section on-dark-bg rood-band" id="rood-licht" data-screen-label="Rood licht band">
- <div class="glow"></div>
- <div class="container inner reveal">
- <div>
- <span class="badge" data-nl="De hele dag boekbaar" data-en="Bookable all day">De hele dag boekbaar</span>
- <h2 style="margin:22px 0 16px;max-width:16ch" data-nl="Rood Licht Therapie, wanneer het jou uitkomt" data-en="Red Light Therapy, whenever it suits you">Rood Licht Therapie, wanneer het jou uitkomt</h2>
- <p class="muted" style="max-width:48ch" data-nl="In onze aparte Rode Licht Ruimte boek je zelfstandig, geen afspraak met een medewerker nodig. Ook wanneer de behandelruimte vol zit, vind jij hier je moment van herstel." data-en="In our separate Red Light Room you book independently, no staff appointment needed. Even when the treatment room is full, you'll find your moment of recovery here.">In onze aparte Rode Licht Ruimte boek je zelfstandig, geen afspraak met een medewerker nodig.</p>
- <a class="btn btn-gold" style="margin-top:28px" href="boeken.html?treatment=rood-licht" data-nl="Plan rood licht" data-en="Book red light">Plan rood licht</a>
+ <!-- ROOD LICHT — scroll-gedreven ervaring (op de plek van de honing-quote) -->
+ <section class="rood-scroll" id="rood-licht" data-screen-label="Rood licht ervaring">
+ <div class="rs-track">
+ <div class="rs-stage">
+ <img class="rs-photo" src="assets/rood-licht-ruimte.png" alt="Rode Licht Therapie ruimte bij The Healing Lounge in Leusden" onerror="this.classList.add('img-failed')">
+ <div class="rs-cool"></div>
+ <div class="rs-glow"></div>
+ <div class="rs-roomwash"></div>
+ <div class="rs-scrim"></div>
+ <div class="rs-fade-top"></div>
+ <div class="rs-copy">
+ <span class="eyebrow on-dark" data-nl="Rood Licht Therapie" data-en="Red Light Therapy">Rood Licht Therapie</span>
+ <h2 data-nl="Licht dat dieper werkt" data-en="Light that works deeper">Licht dat dieper werkt</h2>
+ <p data-nl="Scroll en zie het rode licht ontwaken. Herstel voor huid, spieren en geest, de hele dag zelfstandig boekbaar in onze aparte Rode Licht Ruimte, geen afspraak met een medewerker nodig." data-en="Scroll and watch the red light awaken. Recovery for skin, muscles and mind, bookable independently all day in our separate Red Light Room, no staff appointment needed.">Scroll en zie het rode licht ontwaken. Herstel voor huid, spieren en geest, de hele dag zelfstandig boekbaar in onze aparte Rode Licht Ruimte, geen afspraak met een medewerker nodig.</p>
+ <a class="btn btn-gold btn-lg" href="boeken.html?treatment=rood-licht" data-nl="Plan rood licht" data-en="Book red light">Plan rood licht</a>
  </div>
- <div class="photo" style="border-radius:var(--r-lg);aspect-ratio:4/3.4;min-height:240px">
- <img src="https://www-static.thehealinglounge.nl/wp-content/uploads/2025/08/Untitled-3.jpg" alt="Rode Licht Ruimte" onerror="this.classList.add('img-failed')">
- <div class="scrim" style="background:linear-gradient(180deg,transparent,rgba(176,84,63,.35))"></div>
+ <div class="rs-fade-bottom"></div>
  </div>
- </div>
- </section>
-
- <!-- RITUEEL / SHADER -->
- <section class="ritueel" data-screen-label="Ritueel shader">
- <canvas id="ritueel-canvas" aria-hidden="true"></canvas>
- <div class="inner">
- <p class="quote" data-nl-html="Tot rust komen<br>is een ritueel." data-en-html="Coming to rest<br>is a ritual.">Tot rust komen<br>is een ritueel.</p>
  </div>
  </section>
 
@@ -302,17 +320,30 @@
   <script src="assets/overrides.js"></script>
  <script src="assets/site.js"></script>
  <script>
- // Mount the honingstroom shader as a calm, living background in the ritual section.
- (function(){
- var cv = document.getElementById('ritueel-canvas');
- function go(){ if(window.HLMountShader && cv) window.HLMountShader(cv, 'honeyreal', {speed:0.6, maxDpr:1.5}); }
- if(document.readyState!=='loading') go(); else window.addEventListener('DOMContentLoaded', go);
- })();
- // Mount the same honingstroom shader as the living hero background.
+ // Mount the honingstroom shader as the living hero background.
  (function(){
  var cv = document.getElementById('hero-canvas');
  function go(){ if(window.HLMountShader && cv) window.HLMountShader(cv, 'honeyreal', {speed:0.7, maxDpr:1.4}); }
  if(document.readyState!=='loading') go(); else window.addEventListener('DOMContentLoaded', go);
+ })();
+ // Scroll-gedreven Rood Licht ervaring: voortgang 0→1 laat de lampen branden (CSS-variabele --lit).
+ (function(){
+ var sec=document.getElementById('rood-licht'); if(!sec||!sec.classList.contains('rood-scroll')) return;
+ var track=sec.querySelector('.rs-track'), stage=sec.querySelector('.rs-stage');
+ var fadeB=sec.querySelector('.rs-fade-bottom');
+ var clamp=function(v){ return v<0?0:v>1?1:v; };
+ var smooth=function(t){ return t*t*(3-2*t); };
+ function set(p){
+ stage.style.setProperty('--lit', smooth(clamp((p-0.05)/0.78)).toFixed(3));
+ if(fadeB) fadeB.style.opacity=clamp((p-0.80)/0.20).toFixed(3);
+ }
+ var reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduce){ set(1); return; }
+ var ticking=false;
+ function onScroll(){ if(ticking) return; ticking=true; requestAnimationFrame(function(){ var r=track.getBoundingClientRect(); var denom=(r.height-window.innerHeight)||1; set(clamp(-r.top/denom)); ticking=false; }); }
+ window.addEventListener('scroll', onScroll, {passive:true});
+ window.addEventListener('resize', onScroll);
+ onScroll();
  })();
  </script>
 </body>
