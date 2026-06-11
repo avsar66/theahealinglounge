@@ -316,7 +316,7 @@
  function drawContent(y){
  // eyebrow
  ctx.fillStyle='#D7B877'; ctx.font='600 25px "Mulish", sans-serif';
- ctx.fillText((L()==='nl'?'JOUW PERSOONLIJKE MATCH':'YOUR PERSONAL MATCH'), PAD, y); y+=54;
+ ctx.fillText((L()==='nl'?'JOUW PERSOONLIJKE MATCH':'YOUR PERSONAL MATCH'), PAD, y); y+=84;
  // name
  ctx.fillStyle='#F3ECDE'; ctx.font='500 80px "Cormorant Garamond", Georgia, serif';
  y = drawWrapped(name, PAD, y, CW, 82, 2);
